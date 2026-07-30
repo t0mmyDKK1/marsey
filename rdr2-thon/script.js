@@ -707,6 +707,7 @@ function renderPoll() {
 /* ------------------------------------------------------------------ journal */
 
 let journalIndex = 0;
+let journalInteracted = false;
 let journalFilter = "all";
 
 function visibleEntries() {
@@ -784,7 +785,7 @@ function renderJournal() {
       !entry.spoiler || !document.body.classList.contains("spoiler-free");
 
   markEntrySeen(entry.id);
-  history.replaceState(
+  if (journalInteracted) history.replaceState(
     null,
     "",
     `${location.pathname}${location.search}#journal-${entry.id}`,
@@ -808,12 +809,14 @@ function initJournal() {
   if (prev)
     prev.addEventListener("click", () => {
       journalIndex--;
-      renderJournal();
+      journalInteracted = true;
+       renderJournal();
     });
   if (next)
     next.addEventListener("click", () => {
       journalIndex++;
-      renderJournal();
+      journalInteracted = true;
+       renderJournal();
     });
 
   const filters = $("[data-journal-days]");
@@ -827,7 +830,8 @@ function initJournal() {
         button.setAttribute("aria-selected", String(isActive));
         button.tabIndex = isActive ? 0 : -1;
       });
-      renderJournal();
+      journalInteracted = true;
+       renderJournal();
     });
   }
 
