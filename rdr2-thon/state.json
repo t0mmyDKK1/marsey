@@ -1,0 +1,383 @@
+{
+  "_readme": "Dette er STARTFILEN. Når server.js kører første gang, kopieres den til data/state.json, og derefter redigeres alt via adminpanelet på /admin. Rediger kun denne fil direkte, hvis siden hostes helt uden server.",
+
+  "updatedAt": "2026-07-29T12:00:00+02:00",
+  "phase": "pre",
+  "_phase": "pre | live | sleep | ended",
+
+  "startsAt": "2026-08-10T14:00:00+02:00",
+  "endedAt": null,
+
+  "sleep": { "wakesAt": null },
+
+  "story": {
+    "chapterNum": 0,
+    "chapterName": "Prolog",
+    "mission": null,
+    "progressPct": 0,
+    "spoilerSafe": true,
+    "plainLanguage": "Vi er ikke redet ud endnu. Rejsen begynder 10. august kl. 14."
+  },
+
+  "camp": { "index": 0, "name": "Ikke redet ud" },
+
+  "horse": {
+    "name": null,
+    "namedBy": null,
+    "status": "i live",
+    "votingOpen": false,
+    "options": []
+  },
+
+  "counters": {
+    "fastTravels": 0,
+    "deaths": 0,
+    "hoursSlept": 0,
+    "communityEntries": 0,
+    "coffees": 0
+  },
+
+  "honour": {
+    "pct": null,
+    "label": null,
+    "history": []
+  },
+
+  "donations": {
+    "total": 0,
+    "currency": "kr.",
+    "charity": {
+      "name": null,
+      "goal": 0,
+      "url": null,
+      "note": "Donationer forlænger ikke uret. De går ubeskåret videre."
+    }
+  },
+
+  "poll": {
+    "id": null,
+    "question": null,
+    "options": [],
+    "resolved": null
+  },
+
+  "predictions": [],
+
+  "gazette": [],
+
+  "graves": [],
+
+  "quotes": [],
+
+  "bounties": [],
+
+  "guests": [],
+
+  "route": {
+    "planned": [
+      { "num": "01", "name": "Colter", "day": 1 },
+      { "num": "02", "name": "Valentine", "day": 2 },
+      { "num": "03", "name": "Rhodes", "day": 3, "spoiler": true },
+      { "num": "04", "name": "Saint Denis", "day": 4, "spoiler": true },
+      { "num": "05", "name": "Beaver Hollow", "day": 5, "spoiler": true },
+      { "num": "06", "name": "Finalen", "day": 6, "spoiler": true },
+      { "num": "07", "name": "Epilogen", "day": 7, "spoiler": true }
+    ],
+    "reached": []
+  },
+
+  "trail": [
+    { "num": "I", "name": "Colter", "status": "waiting" },
+    { "num": "II", "name": "Horseshoe Overlook", "status": "waiting" },
+    {
+      "num": "III",
+      "name": "Clemens Point",
+      "status": "waiting",
+      "spoiler": true
+    },
+    {
+      "num": "IV",
+      "name": "Saint Denis og videre",
+      "status": "waiting",
+      "spoiler": true
+    }
+  ],
+
+  "dispatches": [
+    {
+      "at": "2026-07-29T12:00:00+02:00",
+      "title": "Lejren er under opbygning",
+      "text": "Kommandobordet er åbnet. Vi gør klar til afgang."
+    }
+  ],
+
+  "journal": [
+    {
+      "id": "announcement",
+      "day": 0,
+      "dayLabel": "FØR EVENTET",
+      "at": "2026-07-20T18:00:00+02:00",
+      "chapter": "ANNONCERING",
+      "category": "BREAKING NEWS",
+      "title": "RDR2-Thon bliver annonceret",
+      "body": "Datoen er sat. Den 10. august kl. 14.00 begynder Marcels længste rejse: én sammenhængende dansk stream gennem Red Dead Redemption II.",
+      "quote": "Uret stopper først, når historien er slut.",
+      "note": "Syv dage? Det lød kortere på papiret.",
+      "tags": ["ANNONCERING", "OFFICIELT"],
+      "caption": "Den første plakat bliver hængt op.",
+      "production": "Eventets officielle navn, dato og grundidé bliver offentliggjort. Kortet er stadig tomt, men destinationen er klar.",
+      "credit": "RDR2-Thon produktionen",
+      "spoiler": false
+    },
+    {
+      "id": "table-open",
+      "day": 0,
+      "dayLabel": "FØR EVENTET",
+      "at": "2026-07-25T21:30:00+02:00",
+      "chapter": "FORBEREDELSE",
+      "category": "BAG KULISSEN",
+      "title": "Kommandobordet åbner",
+      "body": "Kort, telegrammer og den første udgave af Frontier Gazette finder vej til lejren. Hvert objekt bliver en indgang til eventets levende arkiv.",
+      "quote": "Det må gerne være endnu vildere.",
+      "note": "Tilføj flere kafferinge.",
+      "tags": ["WEBSITE", "BAG KULISSEN"],
+      "caption": "Lejren tager form.",
+      "production": "Den interaktive eventside bliver bygget som et fysisk kommandobord. Communityets øjeblikke får deres egen journal.",
+      "credit": "RDR2-Thon produktionen",
+      "spoiler": false
+    },
+    {
+      "id": "camp-built",
+      "day": 0,
+      "dayLabel": "FØR EVENTET",
+      "at": "2026-07-29T12:00:00+02:00",
+      "chapter": "LEJREN BYGGES",
+      "category": "PRODUKTIONSNOTE",
+      "title": "Lejren bliver bygget",
+      "body": "Kommandobordet er åbnet, kortet foldet ud, og de første sider venter på at blive skrevet. Om fjorten dage begynder rejsen.",
+      "quote": "Ét spil. Én stream. Uret stopper først, når historien er slut.",
+      "note": "Husk kaffe. Meget kaffe.",
+      "tags": ["FORBEREDELSE", "OFFICIELT"],
+      "caption": "Rejsen venter mod vest.",
+      "production": "Den første officielle journal-side. Under eventet bliver den fulgt af dagens bedste øjeblikke, klip og community-kommentarer.",
+      "credit": "RDR2-Thon produktionen",
+      "spoiler": false
+    }
+  ],
+
+  "schedule": {
+    "_note": "atHours = timer efter start. Siden regner selv klokkeslæt og dag ud.",
+    "beats": [
+      {
+        "atHours": 0,
+        "type": "milestone",
+        "status": "fixed",
+        "title": "Portene åbner",
+        "text": "Vi rider ud. Uret starter og stopper ikke igen."
+      },
+      {
+        "atHours": 0.25,
+        "type": "story",
+        "status": "estimated",
+        "title": "Prologen: Colter",
+        "text": "Vi starter i sneen og møder banden. Rejsen begynder helt fra nul."
+      },
+      {
+        "atHours": 3.5,
+        "type": "story",
+        "status": "estimated",
+        "title": "Ned fra bjerget",
+        "text": "Første lejr, første missioner og de første tvivlsomme beslutninger."
+      },
+      {
+        "atHours": 7,
+        "type": "story",
+        "status": "estimated",
+        "title": "Horseshoe Overlook",
+        "text": "Verden åbner sig. Chatten hjælper med valg af hest og udstyr."
+      },
+      {
+        "atHours": 13,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Første søvnblok",
+        "text": "Streamen kører videre. Uret kører videre. Marcel gør ikke."
+      },
+      {
+        "atHours": 19,
+        "type": "story",
+        "status": "estimated",
+        "title": "Valentine kalder",
+        "text": "Jobs, gæld og problemer i den nærmeste saloon."
+      },
+      {
+        "atHours": 24,
+        "type": "story",
+        "status": "estimated",
+        "title": "Heartlands",
+        "text": "Jagt, lejr og hovedmissioner gennem det åbne land."
+      },
+      {
+        "atHours": 29,
+        "type": "story",
+        "status": "estimated",
+        "title": "En stille aften?",
+        "text": "Poker, fremmede og alt det, der går galt på vejen."
+      },
+      {
+        "atHours": 37,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Anden søvnblok",
+        "text": "Sov trygt. Vi holder øje med bålet."
+      },
+      {
+        "atHours": 43,
+        "type": "story",
+        "status": "estimated",
+        "title": "Clemens Point",
+        "text": "Banden flytter sydpå. To familier og én dårlig plan.",
+        "spoiler": true
+      },
+      {
+        "atHours": 48,
+        "type": "story",
+        "status": "estimated",
+        "title": "Rhodes",
+        "text": "Sheriffer, hemmeligheder og voksende problemer.",
+        "spoiler": true
+      },
+      {
+        "atHours": 53,
+        "type": "story",
+        "status": "estimated",
+        "title": "Blodfejde",
+        "text": "Vi følger kapitlet så langt natten rækker.",
+        "spoiler": true
+      },
+      {
+        "atHours": 61,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Tredje søvnblok",
+        "text": "Halvvejs. Nogenlunde."
+      },
+      {
+        "atHours": 67,
+        "type": "story",
+        "status": "estimated",
+        "title": "Saint Denis",
+        "text": "Storbyen åbner dørene — og lukker fælden.",
+        "spoiler": true
+      },
+      {
+        "atHours": 72,
+        "type": "story",
+        "status": "estimated",
+        "title": "Den store plan",
+        "text": "Dutch lover, at denne gang bliver anderledes.",
+        "spoiler": true
+      },
+      {
+        "atHours": 78,
+        "type": "story",
+        "status": "estimated",
+        "title": "Ingen vej tilbage",
+        "text": "Kapitlet fortsætter uden spoilers i programmet.",
+        "spoiler": true
+      },
+      {
+        "atHours": 85,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Fjerde søvnblok",
+        "text": "Hvis vi overhovedet kan sove efter det der."
+      },
+      {
+        "atHours": 91,
+        "type": "story",
+        "status": "estimated",
+        "title": "Tilbage på sporet",
+        "text": "Banden samles igen, men alt har forandret sig.",
+        "spoiler": true
+      },
+      {
+        "atHours": 96,
+        "type": "story",
+        "status": "estimated",
+        "title": "Beaver Hollow",
+        "text": "Loyalitet, tvivl og jagten på en udvej.",
+        "spoiler": true
+      },
+      {
+        "atHours": 102,
+        "type": "story",
+        "status": "estimated",
+        "title": "Regnskabets time",
+        "text": "De valg, vi har taget, begynder at koste.",
+        "spoiler": true
+      },
+      {
+        "atHours": 109,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Femte søvnblok",
+        "text": "Den sidste rigtige søvn før finalen."
+      },
+      {
+        "atHours": 115,
+        "type": "story",
+        "status": "estimated",
+        "title": "Den sidste ridetur",
+        "text": "Hovedhistorien nærmer sig sit afgørende punkt.",
+        "spoiler": true
+      },
+      {
+        "atHours": 121,
+        "type": "story",
+        "status": "estimated",
+        "title": "Kapitel 6 slutter",
+        "text": "Ingen genveje. Ingen spoilers. Bare hele rejsen.",
+        "spoiler": true
+      },
+      {
+        "atHours": 127,
+        "type": "story",
+        "status": "estimated",
+        "title": "Epilogen begynder",
+        "text": "Historien er ikke slut endnu. Det er uret heller ikke.",
+        "spoiler": true
+      },
+      {
+        "atHours": 133,
+        "type": "sleep",
+        "status": "estimated",
+        "title": "Sjette søvnblok",
+        "text": "Sidste pause før den sidste etape."
+      },
+      {
+        "atHours": 139,
+        "type": "story",
+        "status": "estimated",
+        "title": "Den afsluttende etape",
+        "text": "Rejsen fortsætter mod den aftalte afslutning.",
+        "spoiler": true
+      },
+      {
+        "atHours": 146,
+        "type": "story",
+        "status": "estimated",
+        "title": "American Venom",
+        "text": "Eventets aftalte slutmission. Herefter stopper uret.",
+        "spoiler": true
+      },
+      {
+        "atHours": 152,
+        "type": "milestone",
+        "status": "estimated",
+        "title": "Uret stopper",
+        "text": "Kun et estimat — streamen stopper først ved bekræftet gennemførelse."
+      }
+    ]
+  }
+}

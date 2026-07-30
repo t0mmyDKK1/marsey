@@ -1,0 +1,9 @@
+{
+  "name": "Powerwalk",
+  "short_name": "Powerwalk",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#16181a",
+  "theme_color": "#16181a",
+  "icons": [{ "src": "./assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

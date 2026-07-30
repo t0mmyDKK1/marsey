@@ -1,0 +1,2074 @@
+/* ============================================================================
+   POWERWALK
+   ----------------------------------------------------------------------------
+   Landevej + dansk elektronikbutik. Skiltet, kilometertælleren, asfalten med
+   sol og måne, fjernsynet på hylden, prisskiltene og kassebonen.
+
+   Sektionerne skifter farve med vilje: orange → mørk → hvid → blå. Ét mørkt
+   lag hele vejen ned var netop det, der gjorde forrige udgave kedelig.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* >>> POWERS ORANGE STÅR HER OG KUN HER. Ret den ene linje. <<< */
+  --power: #ff6b00;
+
+  --power-dark: #cc5600;
+  --power-tint: rgba(255, 107, 0, 0.14);
+
+  --asphalt: #0d0f11;
+  --asphalt-2: #14181b;
+  --asphalt-3: #1f2429;
+  --paint: #f4f5f3;
+  --sign: #0d3b8c;
+  --sign-2: #082a68;
+  --signal: #ff3b18;
+  --paper: #f6f3ea;
+  --grey: #8d979f;
+  --grey-dim: #59626a;
+  --line: rgba(244, 245, 243, 0.14);
+
+  --display:
+    "Bahnschrift", "DIN Alternate", "Oswald", "Roboto Condensed",
+    "Arial Narrow", system-ui, sans-serif;
+  --ui: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "Courier New", monospace;
+
+  --gut: clamp(20px, 5vw, 84px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--asphalt);
+  color: var(--paint);
+  font: 16px/1.6 var(--ui);
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Kornlag over alt. Det er det, der gør fladt til trykt. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.skip {
+  position: fixed;
+  z-index: 300;
+  top: 8px;
+  left: 8px;
+  padding: 12px 16px;
+  background: var(--power);
+  color: #fff;
+  font-weight: 700;
+  transform: translateY(-170%);
+}
+.skip:focus {
+  transform: none;
+}
+:focus-visible {
+  outline: 3px solid var(--power);
+  outline-offset: 3px;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.empty {
+  color: var(--grey-dim);
+  font-style: italic;
+}
+
+/* Kæmpe typografi bagved, som RDR2's "THE LONG RIDE". */
+.ghost-type {
+  position: absolute;
+  right: -0.03em;
+  top: -0.12em;
+  z-index: 0;
+  pointer-events: none;
+  font: 700 clamp(120px, 22vw, 340px)/0.72 var(--display);
+  letter-spacing: -0.02em;
+  color: rgba(244, 245, 243, 0.032);
+  white-space: nowrap;
+}
+.ghost-dark {
+  color: rgba(13, 15, 17, 0.09);
+}
+
+/* =================================================== reklame / tilbudsstribe */
+.adstrip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 9px var(--gut);
+  background: var(--power);
+  color: #fff;
+  font: 800 12px/1.3 var(--ui);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.adstrip-tag {
+  padding: 3px 9px;
+  background: #fff;
+  color: var(--power);
+  letter-spacing: 0.18em;
+}
+
+/* ================================================================= toplinje */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 var(--gut);
+  height: 66px;
+  background: rgba(13, 15, 17, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+/* POWER-logoet. Er assets/power-logo.svg lagt ind, erstatter den ordmærket. */
+.mark-power {
+  display: flex;
+  align-items: center;
+}
+.mark-power img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+.mark-power-text {
+  padding: 4px 8px 3px;
+  background: var(--power);
+  color: #fff;
+  font: 800 16px/1 var(--ui);
+  letter-spacing: 0.04em;
+}
+.mark-text {
+  font: 700 20px/1 var(--display);
+  letter-spacing: 0.08em;
+}
+.mark-text b {
+  color: var(--power);
+}
+
+.minitrack {
+  position: relative;
+  flex: 1 1 80px;
+  max-width: 190px;
+  height: 7px;
+  background: var(--asphalt-3);
+  border-radius: 4px;
+}
+.minitrack-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--power);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.minitrack-dot {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--paint);
+  border: 2px solid var(--asphalt);
+  transform: translateX(-50%);
+  transition: left 0.6s ease;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  font: 600 13px/1 var(--ui);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+nav a {
+  text-decoration: none;
+  color: var(--grey);
+  padding: 6px 0;
+  position: relative;
+}
+nav a:hover,
+nav a[aria-current] {
+  color: var(--paint);
+}
+nav a[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 3px;
+  background: var(--power);
+}
+.nav-extra button {
+  min-height: 44px;
+  padding: 0 13px;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid var(--grey-dim);
+  color: var(--grey);
+  font: 600 11px var(--ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav-extra button[aria-pressed="true"] {
+  background: var(--power);
+  color: #fff;
+  border-color: var(--power);
+}
+.menu-btn {
+  display: none;
+}
+
+.stale {
+  padding: 11px var(--gut);
+  background: var(--signal);
+  color: #fff;
+  font: 600 14px var(--ui);
+}
+
+/* ==================================================================== HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(30px, 4.5vw, 62px) var(--gut) clamp(44px, 6vw, 80px);
+  background:
+    radial-gradient(90% 60% at 15% 0%, var(--power-tint), transparent 62%),
+    var(--asphalt);
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(26px, 4vw, 60px);
+  align-items: start;
+}
+.hero-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  flex-wrap: wrap;
+}
+.hero-status .blip {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--power);
+  flex: 0 0 11px;
+  box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.65);
+  animation: ping 2s ease-out infinite;
+}
+@keyframes ping {
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 107, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0);
+  }
+}
+.hero-status b {
+  font: 800 14px var(--ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.hero-status > span:last-child {
+  color: var(--grey);
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------- vejtavlen */
+.signpost {
+  position: relative;
+  padding-bottom: clamp(34px, 5vw, 56px);
+}
+.signpost-plate {
+  position: relative;
+  z-index: 2;
+  padding: clamp(16px, 2.4vw, 24px) clamp(20px, 3vw, 34px)
+    clamp(14px, 2vw, 20px);
+  background: linear-gradient(180deg, var(--sign), var(--sign-2));
+  border: 4px solid #fff;
+  border-radius: 12px;
+}
+.signpost-plate::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.42);
+  border-radius: 7px;
+  pointer-events: none;
+}
+.signpost-kind {
+  display: block;
+  font: 700 9px var(--ui);
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+.signpost-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 4px;
+}
+.signpost-dest {
+  font: 700 clamp(28px, 5vw, 58px)/1 var(--display);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+/* Pilen er nu en rigtig vejpil, tegnet som SVG. */
+.signpost-arrow {
+  width: clamp(56px, 8vw, 96px);
+  height: auto;
+  flex: none;
+}
+.signpost-arrow path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 9;
+  stroke-linecap: butt;
+}
+.signpost-arrow path {
+  fill: #fff;
+  stroke: #fff;
+  stroke-width: 8;
+  stroke-linejoin: miter;
+}
+.signpost-sub {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 2px solid rgba(255, 255, 255, 0.26);
+  font: 600 13px var(--ui);
+  color: rgba(255, 255, 255, 0.84);
+}
+.signpost-legs {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 60%;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: clamp(80px, 20vw, 200px);
+}
+.signpost-legs i {
+  width: 15px;
+  background: linear-gradient(
+    90deg,
+    #8b949c 0 22%,
+    #4f575e 22% 62%,
+    #31363b 62%
+  );
+}
+
+/* ------------------------------------- kilometertælleren, monteret som kasse */
+.odobox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 4px;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, #22282e, #131719);
+  border: 2px solid #3a4249;
+  border-radius: 8px;
+}
+.odobox-label,
+.odobox-unit {
+  font: 800 11px var(--ui);
+  letter-spacing: 0.18em;
+  color: var(--grey);
+  text-transform: uppercase;
+}
+.odo {
+  display: inline-flex;
+  gap: 3px;
+}
+.odo-digit {
+  position: relative;
+  width: clamp(34px, 5vw, 52px);
+  height: clamp(50px, 7vw, 74px);
+  overflow: hidden;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #05070a, #1c2126 46%, #05070a);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.odo-digit::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+.odo-reel {
+  display: grid;
+  transition: transform 0.8s cubic-bezier(0.3, 0.85, 0.25, 1);
+}
+.odo-reel span {
+  height: clamp(50px, 7vw, 74px);
+  display: grid;
+  place-items: center;
+  font: 700 clamp(34px, 5vw, 52px)/1 var(--display);
+  color: var(--power);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------- nedtælling (klaptavle) */
+.counter-board {
+  display: grid;
+  gap: 9px;
+  padding: 20px 22px;
+  background: var(--asphalt-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.counter-caption,
+.counter-foot {
+  font: 800 11px var(--ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.flaps {
+  display: flex;
+  gap: 7px;
+}
+.flap {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  flex: 1;
+}
+.flap-box {
+  position: relative;
+  width: 100%;
+  padding: 11px 4px;
+  background: linear-gradient(180deg, #262c32 0 49.6%, #121619 50.4% 100%);
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  font: 700 clamp(26px, 3.6vw, 40px)/1 var(--display);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.flap-box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 50%;
+  height: 2px;
+  background: var(--asphalt);
+}
+.flap-label {
+  font: 800 9px var(--ui);
+  letter-spacing: 0.16em;
+  color: var(--grey);
+}
+
+/* ------------------------------------------------------------- tempokravet */
+.pacebox {
+  margin-top: 16px;
+  padding: 18px 22px;
+  border-radius: 8px;
+  background: var(--asphalt-2);
+  border-left: 5px solid var(--power);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 20px;
+  align-items: center;
+}
+.pacebox-label {
+  grid-column: 1;
+  font: 800 11px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.pacebox > b {
+  grid-column: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font: 700 clamp(30px, 4vw, 46px)/1 var(--display);
+}
+.pacebox > b em {
+  font: 700 0.42em var(--display);
+  font-style: normal;
+  color: var(--grey);
+}
+.pacebox-note {
+  grid-column: 1;
+  color: var(--grey);
+  font-size: 14px;
+}
+.pacebox-actual {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  text-align: right;
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+}
+.pacebox-actual span {
+  display: block;
+  font: 800 10px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.pacebox-actual b {
+  font: 700 26px/1.2 var(--display);
+}
+.pacebox[data-tight="true"] {
+  border-left-color: var(--signal);
+  background: rgba(255, 59, 24, 0.1);
+}
+.pacebox[data-tight="true"] > b {
+  color: var(--signal);
+}
+
+/* =============================================================== SEKTIONER */
+.roadsec,
+.team,
+.watch,
+.prize,
+.receipt-sec,
+.yours,
+.send,
+.facts {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(52px, 7vw, 100px) var(--gut);
+}
+.sec-head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.8fr);
+  gap: clamp(20px, 4vw, 60px);
+  align-items: end;
+  margin-bottom: clamp(26px, 4vw, 46px);
+}
+.sec-index {
+  margin: 0 0 12px;
+  font: 800 12px var(--ui);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--power);
+}
+.sec-head h2 {
+  font: 700 clamp(34px, 5.6vw, 76px)/0.95 var(--display);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.sec-note {
+  margin: 0;
+  color: var(--grey);
+  font-size: 17px;
+}
+
+/* ==================================================================== VEJEN */
+.roadsec {
+  background: var(--asphalt);
+  border-top: 1px solid var(--line);
+}
+.road {
+  position: relative;
+  z-index: 1;
+  height: clamp(300px, 36vw, 420px);
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+/* --- himlen, med sol, måne, stjerner og bakker --- */
+.sky {
+  position: absolute;
+  inset: 0 0 38% 0;
+  transition: background 0.9s ease;
+}
+body[data-sky="day"] .sky {
+  background: linear-gradient(180deg, #3f7fbf, #8fc0dd 62%, #cfe0e6);
+}
+body[data-sky="dawn"] .sky {
+  background: linear-gradient(180deg, #2b3a63, #b06a6a 58%, #e6a86b);
+}
+body[data-sky="dusk"] .sky {
+  background: linear-gradient(180deg, #26224a, #8c4a48 55%, #d97a3c);
+}
+body[data-sky="evening"] .sky {
+  background: linear-gradient(180deg, #131a30, #33324f 60%, #5c4a56);
+}
+body[data-sky="night"] .sky {
+  background: linear-gradient(180deg, #050813, #0d1526 60%, #18202f);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+body[data-sky="night"] .stars,
+body[data-sky="evening"] .stars {
+  opacity: 1;
+}
+.stars i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.celestial {
+  position: absolute;
+  inset: 0;
+}
+.celestial i {
+  position: absolute;
+  border-radius: 50%;
+  transition: opacity 0.9s ease;
+}
+.celestial .sun {
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  background: #ffdf7a;
+  box-shadow: 0 0 44px 14px rgba(255, 205, 90, 0.55);
+}
+.celestial .moon {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  background: #e8eef7;
+  box-shadow: 0 0 26px 8px rgba(210, 225, 245, 0.3);
+}
+body[data-sky="night"] .sun,
+body[data-sky="evening"] .sun {
+  opacity: 0;
+}
+body[data-sky="day"] .moon,
+body[data-sky="dawn"] .moon,
+body[data-sky="dusk"] .moon {
+  opacity: 0;
+}
+
+.hills {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0;
+  height: 42%;
+  background: #1b2a22;
+  opacity: 0.85;
+  clip-path: polygon(
+    0 100%,
+    0 62%,
+    9% 44%,
+    18% 58%,
+    27% 34%,
+    38% 52%,
+    48% 30%,
+    58% 50%,
+    68% 38%,
+    78% 56%,
+    88% 40%,
+    100% 58%,
+    100% 100%
+  );
+}
+body[data-sky="night"] .hills,
+body[data-sky="evening"] .hills {
+  background: #080d14;
+}
+
+/* --- vejkant og asfalt --- */
+.verge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62%;
+  height: 5%;
+  background: linear-gradient(180deg, #4a5a3c, #35422c);
+}
+.tarmac {
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  top: 67%;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    #4b5257 0 4px,
+    #2b3136 4px 10px,
+    #23282d 10%,
+    #15181b
+  );
+}
+.tarmac::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #e9eae7 0 34px,
+    #737b82 34px 68px
+  );
+}
+.centreline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 46%;
+  height: 8px;
+  opacity: 0.9;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--paint) 0 52px,
+    transparent 52px 112px
+  );
+  animation: dash 3.2s linear infinite;
+}
+@keyframes dash {
+  to {
+    transform: translateX(-112px);
+  }
+}
+
+/* --- byskilte --- */
+.road-signs {
+  position: absolute;
+  inset: 0;
+}
+.road-sign {
+  position: absolute;
+  bottom: 33%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.road-sign b {
+  display: block;
+  padding: 4px 8px;
+  background: var(--paint);
+  color: #14181b;
+  font: 700 11px var(--display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+.road-sign small {
+  display: block;
+  font: 700 9px var(--ui);
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 2px;
+}
+.road-sign i {
+  display: block;
+  width: 3px;
+  height: 18px;
+  margin: 0 auto;
+  background: #737b82;
+}
+.road-sign.passed b {
+  background: var(--power);
+  color: #fff;
+}
+.road-sign.goal b {
+  background: var(--signal);
+  color: #fff;
+}
+
+/* --- færgen --- */
+.road-ferry {
+  position: absolute;
+  bottom: 41%;
+  transform: translateX(-50%);
+}
+.boat {
+  display: block;
+  width: 30px;
+  height: 12px;
+  background: #9ec5ff;
+  clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
+  animation: bob 3s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* --- de tre. ÉN gruppe: de går sammen hele vejen og må aldrig skilles. --- */
+.squad {
+  position: absolute;
+  bottom: 11%;
+  left: 0;
+  width: 0;
+  height: 54px;
+  transition: left 0.9s ease;
+}
+.figure {
+  position: absolute;
+  bottom: 0;
+  width: 18px;
+  height: 44px;
+}
+.figure .head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: var(--fig);
+}
+.figure .body {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 3px;
+  height: 18px;
+  margin-left: -1.5px;
+  background: var(--fig);
+}
+.figure .leg {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  width: 3px;
+  height: 17px;
+  margin-left: -1.5px;
+  background: var(--fig);
+  transform-origin: top center;
+}
+.figure .leg-a {
+  animation: step-a 0.9s ease-in-out infinite;
+}
+.figure .leg-b {
+  animation: step-b 0.9s ease-in-out infinite;
+}
+@keyframes step-a {
+  0%,
+  100% {
+    transform: rotate(17deg);
+  }
+  50% {
+    transform: rotate(-17deg);
+  }
+}
+@keyframes step-b {
+  0%,
+  100% {
+    transform: rotate(-17deg);
+  }
+  50% {
+    transform: rotate(17deg);
+  }
+}
+.figure em {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 800 9px var(--ui);
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: var(--fig);
+}
+.figure[data-state="pause"] .leg {
+  animation: none;
+}
+.figure[data-state="pause"] .leg-a {
+  transform: rotate(13deg);
+}
+.figure[data-state="ude"] {
+  opacity: 0.28;
+}
+.figure[data-state="ude"] .leg {
+  animation: none;
+}
+
+.road-readout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 15px 0 0;
+  font: 700 11px var(--ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.lg {
+  width: 15px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: 0;
+}
+.lg-boat {
+  background: #9ec5ff;
+}
+
+/* ============================================ HOLDET — orange sektion */
+.team {
+  background: var(--power);
+  color: #14100a;
+  border-top: 0;
+}
+.team .sec-index {
+  color: rgba(20, 16, 10, 0.62);
+}
+.team .sec-note {
+  color: rgba(20, 16, 10, 0.76);
+}
+.crew {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.member {
+  display: grid;
+  gap: 2px;
+  padding: 22px;
+  border-radius: 10px;
+  background: #14181b;
+  color: var(--paint);
+}
+.member-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.member-photo {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: grid;
+  place-items: center;
+  font: 700 24px var(--display);
+  background: var(--fig, var(--power));
+  color: #14181b;
+}
+.member h3 {
+  font: 700 26px/1 var(--display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.member-handle {
+  font: 600 12px var(--ui);
+  color: var(--grey);
+}
+.member-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.member-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font: 800 10px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--fig, var(--power));
+  color: #14181b;
+}
+.member[data-state="pause"] .member-state {
+  background: #9ec5ff;
+}
+.member[data-state="ude"] .member-state {
+  background: var(--signal);
+  color: #fff;
+}
+.member[data-state="ude"] .member-photo {
+  background: var(--grey-dim);
+}
+.member-note {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--grey);
+}
+.member-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 6px;
+  background: var(--power);
+  color: #fff;
+  text-decoration: none;
+  font: 800 11px var(--ui);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.member-link:hover {
+  background: #fff;
+  color: var(--power);
+}
+
+/* ================================================ STREAMEN — showroom */
+.watch {
+  background:
+    radial-gradient(
+      70% 50% at 50% 12%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #191d21, var(--asphalt));
+}
+.showroom {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: start;
+}
+.tvset {
+  display: grid;
+  justify-items: center;
+}
+.tv-bezel {
+  width: 100%;
+  padding: 12px 12px 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #2f353b, #171b1f);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.tv-screen {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #04060a;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.95);
+}
+.tv-screen iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tv-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    128deg,
+    rgba(255, 255, 255, 0.09) 0 22%,
+    transparent 42%
+  );
+}
+.tv-brandbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  padding: 9px 0 11px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, #171b1f, #0f1215);
+}
+.tv-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3d454c;
+}
+body.embeds-on .tv-led {
+  background: var(--signal);
+  box-shadow: 0 0 9px var(--signal);
+}
+.tv-brand {
+  font: 800 10px var(--ui);
+  letter-spacing: 0.3em;
+  color: #565f66;
+}
+.tv-stand {
+  display: grid;
+  justify-items: center;
+}
+.tv-stand i {
+  width: 74px;
+  height: 26px;
+  background: linear-gradient(180deg, #22272c, #14181b);
+  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+}
+.tv-stand b {
+  display: block;
+  width: 190px;
+  height: 9px;
+  border-radius: 5px;
+  background: #1b2025;
+}
+
+.showroom-side {
+  display: grid;
+  gap: 16px;
+}
+.tv-channels {
+  display: grid;
+  gap: 8px;
+}
+.tv-channels button {
+  min-height: 50px;
+  padding: 0 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+  border: 1px solid #343b41;
+  background: #191d21;
+  color: var(--grey);
+  font: 700 13px var(--ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tv-channels button[aria-selected="true"] {
+  background: var(--power);
+  border-color: var(--power);
+  color: #fff;
+}
+.pricetag-small {
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 6px;
+  background: var(--power);
+  color: #fff;
+}
+.pricetag-small span {
+  display: block;
+  font: 800 10px var(--ui);
+  letter-spacing: 0.18em;
+  opacity: 0.8;
+}
+.pricetag-small b {
+  display: block;
+  font: 700 32px/1 var(--display);
+}
+.pricetag-small em {
+  font-style: normal;
+  font-size: 12px;
+  opacity: 0.85;
+}
+.shelf-plank {
+  position: relative;
+  z-index: 1;
+  height: 15px;
+  margin-top: 18px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6b4a2b, #3c2917);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+}
+
+.gate,
+.offair {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  background: #0a0d11;
+}
+.gate-power {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--power);
+  position: relative;
+}
+.gate-power::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 3px;
+  height: 17px;
+  margin-left: -1.5px;
+  background: var(--power);
+  box-shadow: 0 0 0 3px #0a0d11;
+}
+.gate-title {
+  margin: 0;
+  font: 700 clamp(18px, 2.2vw, 26px) var(--display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.gate-note {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--grey);
+  font-size: 14px;
+}
+.gate-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gate-legal {
+  margin: 0;
+  font-size: 13px;
+}
+.gate-legal a,
+.link {
+  color: var(--grey);
+}
+body.embeds-on .gate {
+  display: none;
+}
+.offair b {
+  font: 700 clamp(20px, 3vw, 32px) var(--display);
+  letter-spacing: 0.12em;
+  color: var(--grey);
+}
+.offair p {
+  margin: 0;
+  color: var(--grey-dim);
+  max-width: 38ch;
+}
+
+/* ============================================ PRÆMIEN — lys sektion */
+.prize {
+  background: var(--paper);
+  color: #14181b;
+}
+.prize .sec-index {
+  color: var(--power-dark);
+}
+.prize .sec-note {
+  color: #565c62;
+}
+.tags {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+  flex-wrap: wrap;
+}
+.tag {
+  position: relative;
+  flex: 1 1 230px;
+  padding: 26px 24px 22px;
+  border: 0;
+  cursor: default;
+  background: var(--power);
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  border-radius: 5px;
+  box-shadow: 0 9px 0 rgba(0, 0, 0, 0.16);
+}
+.tag::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: solid transparent;
+  border-width: 0 0 22px 22px;
+  border-left-color: rgba(0, 0, 0, 0.2);
+}
+.tag-kind {
+  display: block;
+  font: 800 10px var(--ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.tag-price {
+  display: block;
+  margin: 5px 0 2px;
+  font: 700 clamp(38px, 5.2vw, 58px)/1 var(--display);
+  font-variant-numeric: tabular-nums;
+}
+.tag-each {
+  font: 600 13px var(--ui);
+  opacity: 0.88;
+}
+.tag[data-votable="true"] {
+  cursor: pointer;
+}
+.tag[data-votable="true"]:hover,
+.tag[aria-pressed="true"],
+.tag.won {
+  background: #14181b;
+  color: var(--power);
+}
+.tag.won::before {
+  content: "VALGT";
+  position: absolute;
+  top: -12px;
+  left: 18px;
+  padding: 3px 10px;
+  background: var(--signal);
+  color: #fff;
+  font: 800 10px var(--ui);
+  letter-spacing: 0.16em;
+}
+.prize-note {
+  margin: 0;
+  color: #565c62;
+  font-weight: 600;
+}
+
+/* ================================================================== BONEN */
+.receipt-sec {
+  background: var(--asphalt);
+  border-top: 1px solid var(--line);
+}
+.receipt-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+.receipt {
+  padding: 0 22px 18px;
+  background: var(--paper);
+  color: #17191a;
+  font: 13px/1.5 var(--mono);
+  border-radius: 2px;
+}
+.receipt-top,
+.receipt-bottom {
+  height: 11px;
+  margin: 0 -22px;
+  background-image:
+    linear-gradient(-45deg, transparent 50%, var(--asphalt) 50%),
+    linear-gradient(45deg, transparent 50%, var(--asphalt) 50%);
+  background-size: 12px 12px;
+  background-repeat: repeat-x;
+}
+.receipt-bottom {
+  transform: rotate(180deg);
+}
+.receipt-head {
+  text-align: center;
+  padding: 13px 0 11px;
+  border-bottom: 1px dashed #b7b3a7;
+}
+.receipt-head b {
+  display: block;
+  font: 700 19px var(--display);
+  letter-spacing: 0.16em;
+}
+.receipt-head span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #5d5a52;
+}
+.receipt-lines {
+  list-style: none;
+  margin: 0;
+  padding: 11px 0;
+}
+.receipt-lines li {
+  padding: 9px 0;
+  border-bottom: 1px dashed #cfcbbe;
+}
+.rl-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 700;
+}
+.rl-km {
+  color: var(--power-dark);
+}
+.receipt-lines p {
+  margin: 4px 0 0;
+  color: #46443f;
+}
+.rl-by {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #7a766c;
+}
+.receipt-sum {
+  padding: 9px 0;
+  border-top: 1px dashed #b7b3a7;
+  border-bottom: 1px dashed #b7b3a7;
+}
+.receipt-sum > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+}
+.receipt-sum b {
+  font-variant-numeric: tabular-nums;
+}
+.receipt-thanks {
+  margin: 11px 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: #5d5a52;
+}
+.receipt-code {
+  height: 40px;
+  margin-bottom: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #17191a 0 2px,
+    transparent 2px 4px,
+    #17191a 4px 7px,
+    transparent 7px 9px,
+    #17191a 9px 10px,
+    transparent 10px 14px
+  );
+}
+
+.toll h3 {
+  font: 700 clamp(20px, 2.4vw, 28px) var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+.ailments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.ailments li {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 13px 16px;
+  border-radius: 5px;
+  background: var(--asphalt-2);
+  border-left: 4px solid var(--signal);
+  font-size: 15px;
+}
+.ailments b {
+  min-width: 88px;
+}
+.ailments small {
+  color: var(--grey);
+}
+
+/* ================================================================ DIN TUR */
+.yours {
+  background: linear-gradient(180deg, var(--asphalt-2), var(--asphalt));
+  border-top: 1px solid var(--line);
+}
+.yours-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: clamp(20px, 4vw, 50px);
+  align-items: center;
+}
+.yours-facts {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+.yours-facts > div {
+  padding: 18px 20px;
+  border-radius: 8px;
+  background: var(--asphalt-3);
+  border-left: 4px solid var(--power);
+}
+.yours-facts b {
+  display: block;
+  font: 700 clamp(32px, 4vw, 46px)/1 var(--display);
+  color: var(--power);
+}
+.yours-facts span {
+  font: 800 10px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.yours-actions {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.yours-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--grey-dim);
+}
+
+/* =============================================================== FORMULAR */
+.send {
+  background: var(--asphalt);
+  border-top: 1px solid var(--line);
+}
+.send-form {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  display: grid;
+  gap: 15px;
+}
+.f-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.f-checks {
+  display: grid;
+  gap: 10px;
+}
+.send-form label {
+  display: grid;
+  gap: 6px;
+  font: 800 11px var(--ui);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.send-form input,
+.send-form textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 15px;
+  border-radius: 5px;
+  background: var(--asphalt-2);
+  border: 1px solid var(--grey-dim);
+  color: var(--paint);
+  font: 16px var(--ui);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.send-form textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+.send-form .chk {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--paint);
+}
+.send-form .chk input {
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  flex: 0 0 24px;
+  margin-top: 2px;
+}
+.f-bottom {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+#send-status {
+  margin: 0;
+  font-size: 14px;
+  color: var(--grey);
+}
+[aria-invalid="true"] {
+  border-color: var(--signal) !important;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--power);
+  color: #fff;
+  text-decoration: none;
+  font: 800 13px var(--ui);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.btn:hover {
+  background: var(--power-dark);
+}
+.link {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* ================================================= FAKTA — blå sektion */
+.facts {
+  background: var(--sign);
+  color: #fff;
+}
+.facts .sec-index {
+  color: rgba(255, 255, 255, 0.66);
+}
+.facts .sec-note {
+  color: rgba(255, 255, 255, 0.78);
+}
+.facts-list {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.facts-list > div {
+  background: var(--sign);
+  padding: 19px 22px;
+  display: grid;
+  grid-template-columns: minmax(190px, 300px) 1fr;
+  gap: 8px 26px;
+}
+.facts-list dt {
+  font: 700 17px var(--display);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.facts-list dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ================================================================== FOOTER */
+.foot {
+  padding: clamp(42px, 6vw, 70px) var(--gut) 36px;
+  border-top: 4px solid var(--power);
+  background: #090b0d;
+}
+.foot-top {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.foot-mark {
+  font-size: 27px;
+}
+.foot-top p {
+  margin: 0;
+  color: var(--grey);
+  max-width: 42ch;
+}
+.foot-bottom {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 22px;
+  font: 700 11px var(--ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.foot-bottom nav {
+  margin: 0;
+  gap: 16px;
+}
+.foot-links {
+  display: flex;
+  gap: 16px;
+}
+.foot-bottom a {
+  color: var(--grey);
+  text-decoration: none;
+}
+.foot-bottom a:hover {
+  color: var(--paint);
+}
+.foot-legal {
+  margin-left: auto;
+  color: var(--grey-dim);
+}
+
+.toast {
+  position: fixed;
+  z-index: 200;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  max-width: min(520px, calc(100% - 32px));
+  padding: 15px 22px;
+  border-radius: 5px;
+  background: var(--power);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+.toast.bad {
+  background: var(--signal);
+}
+
+/* ============================================================== TESTPANEL */
+.testpanel {
+  position: fixed;
+  z-index: 250;
+  right: 16px;
+  bottom: 16px;
+  width: min(300px, calc(100% - 32px));
+  padding: 16px 18px 18px;
+  border-radius: 10px;
+  background: #14181b;
+  border: 2px solid var(--power);
+  color: var(--paint);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.6);
+}
+.testpanel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.testpanel-head b {
+  font: 800 12px var(--ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--power);
+}
+.testpanel-head button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--grey);
+  font-size: 22px;
+  cursor: pointer;
+}
+.testpanel label {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 14px;
+  font: 700 11px var(--ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.testpanel output {
+  color: var(--paint);
+  font: 700 15px var(--display);
+}
+.testpanel input[type="range"] {
+  width: 100%;
+  accent-color: var(--power);
+}
+.testpanel-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.testpanel-row button {
+  flex: 1 1 auto;
+  min-height: 38px;
+  padding: 0 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--grey-dim);
+  background: transparent;
+  color: var(--grey);
+  font: 700 10px var(--ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.testpanel-row button[aria-pressed="true"] {
+  background: var(--power);
+  border-color: var(--power);
+  color: #fff;
+}
+.testpanel .btn {
+  width: 100%;
+  min-height: 44px;
+  font-size: 11px;
+}
+.testpanel-open {
+  position: fixed;
+  z-index: 250;
+  right: 16px;
+  bottom: 16px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 2px solid var(--power);
+  border-radius: 8px;
+  background: #14181b;
+  color: var(--power);
+  font: 800 11px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* ==================================================================== FASER */
+body[data-phase="resting"] .blip {
+  background: #9ec5ff;
+  animation: none;
+}
+body[data-phase="arrived"] .blip {
+  background: var(--power);
+  animation: none;
+}
+body[data-phase="stopped"] .blip {
+  background: var(--signal);
+  animation: none;
+}
+body[data-phase="pre"] .blip {
+  background: var(--grey);
+  animation: none;
+}
+body[data-phase="pre"] .pacebox,
+body[data-phase="arrived"] .pacebox,
+body[data-phase="stopped"] .pacebox {
+  display: none;
+}
+body[data-phase="resting"] .centreline,
+body[data-phase="pre"] .centreline,
+body[data-phase="arrived"] .centreline {
+  animation: none;
+}
+body[data-phase="resting"] .figure .leg,
+body[data-phase="pre"] .figure .leg,
+body[data-phase="arrived"] .figure .leg {
+  animation: none;
+}
+
+/* ==================================================================== MOBIL */
+@media (max-width: 1000px) {
+  .hero-inner,
+  .sec-head,
+  .showroom,
+  .receipt-grid,
+  .yours-grid {
+    grid-template-columns: 1fr;
+  }
+  .sec-head {
+    align-items: start;
+    gap: 16px;
+  }
+  .receipt {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    height: 58px;
+    gap: 12px;
+  }
+  .minitrack {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
+    margin-left: auto;
+    min-height: 44px;
+    padding: 0 15px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid var(--grey-dim);
+    color: var(--paint);
+    font: 700 12px var(--ui);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  nav {
+    display: none;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--asphalt-2);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.open {
+    display: flex;
+  }
+  nav a {
+    padding: 15px var(--gut);
+  }
+  .nav-extra {
+    padding: 10px var(--gut) 4px;
+  }
+  .nav-extra button {
+    width: 100%;
+  }
+  .signpost-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .facts-list > div {
+    grid-template-columns: 1fr;
+  }
+  .f-row {
+    grid-template-columns: 1fr;
+  }
+  .foot-legal {
+    margin-left: 0;
+    width: 100%;
+  }
+  .ghost-type {
+    font-size: clamp(80px, 26vw, 160px);
+  }
+}
+
+@media (max-width: 560px) {
+  .adstrip {
+    font-size: 11px;
+    gap: 9px;
+  }
+  .road {
+    height: 280px;
+  }
+  .pacebox {
+    grid-template-columns: 1fr;
+  }
+  .pacebox-actual {
+    grid-column: 1;
+    grid-row: auto;
+    text-align: left;
+    padding: 12px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* ======================================================== reduceret bevægelse */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+body.calm *,
+body.calm *::before,
+body.calm *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Sidst: uden denne slår et eksplicit display hidden-attributten. */
+[hidden] {
+  display: none !important;
+}
+
+/* Skilte der står tæt (Nykøbing 24 km og Færgen 33 km) løftes skiftevis op,
+   så navnene ikke lægger sig oven i hinanden. */
+.road-sign.raised { bottom: 44%; }
+.road-sign.raised i { height: 34px; }
+
+/* Figurerne var lidt små i forhold til scenen. */
+.squad { height: 66px; }
+.figure { width: 22px; height: 54px; }
+.figure .head { width: 11px; height: 11px; margin-left: -5.5px; }
+.figure .body { top: 11px; width: 4px; height: 22px; margin-left: -2px; }
+.figure .leg { top: 32px; width: 4px; height: 21px; margin-left: -2px; }
+.figure em { bottom: 56px; font-size: 10px; }

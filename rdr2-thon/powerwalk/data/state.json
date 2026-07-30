@@ -1,0 +1,173 @@
+{
+  "_readme": "STARTFIL. Når server.js kører første gang, kopieres den til data/state.json, og derefter styres alt fra /admin. Rediger kun her, hvis siden hostes uden server.",
+
+  "updatedAt": "2026-07-29T12:00:00+02:00",
+  "phase": "walking",
+  "_phase": "pre | walking | resting | arrived | stopped",
+
+  "startsAt": "2026-07-28T12:00:00+02:00",
+  "deadlineAt": "2026-07-31T12:00:00+02:00",
+  "arrivedAt": null,
+  "stoppedReason": null,
+
+  "rest": { "until": null, "where": null },
+
+  "route": {
+    "_note": "totalKm er ad vej, ikke fugleflugt. BEKRÆFT DEN — hele tempoudregningen hænger på den. Fugleflugt gennem checkpointene er ca. 101 km.",
+    "totalKm": 120,
+    "checkpoints": [
+      {
+        "id": "odden",
+        "name": "Sjællands Odde",
+        "km": 0,
+        "lat": 55.9706,
+        "lon": 11.3742,
+        "reachedAt": "2026-07-28T12:00:00+02:00",
+        "note": "Start"
+      },
+      {
+        "id": "nykobing",
+        "name": "Nykøbing Sjælland",
+        "km": 23,
+        "lat": 55.9247,
+        "lon": 11.6717,
+        "reachedAt": null,
+        "note": ""
+      },
+      {
+        "id": "vig",
+        "name": "Vig",
+        "km": 35,
+        "lat": 55.85,
+        "lon": 11.59,
+        "reachedAt": null,
+        "note": ""
+      },
+      {
+        "id": "holbaek",
+        "name": "Holbæk",
+        "km": 55,
+        "lat": 55.7167,
+        "lon": 11.71,
+        "reachedAt": null,
+        "note": "Halvvejs"
+      },
+      {
+        "id": "roskilde",
+        "name": "Roskilde",
+        "km": 85,
+        "lat": 55.6415,
+        "lon": 12.0803,
+        "reachedAt": null,
+        "note": ""
+      },
+      {
+        "id": "taastrup",
+        "name": "Taastrup",
+        "km": 100,
+        "lat": 55.65,
+        "lon": 12.3,
+        "reachedAt": null,
+        "note": ""
+      },
+      {
+        "id": "glostrup",
+        "name": "Glostrup",
+        "km": 108,
+        "lat": 55.6667,
+        "lon": 12.4,
+        "reachedAt": null,
+        "note": ""
+      },
+      {
+        "id": "maal",
+        "name": "Fisketorvet",
+        "km": 120,
+        "lat": 55.6626,
+        "lon": 12.564,
+        "reachedAt": null,
+        "note": "Power åbner kl. 12.00"
+      }
+    ]
+  },
+
+  "position": {
+    "_note": "Sættes automatisk af walk.html, når en af dem sender lokation. Kan også sættes manuelt i admin.",
+    "km": 0,
+    "lat": null,
+    "lon": null,
+    "at": null,
+    "source": null,
+    "manual": false
+  },
+
+  "trace": [],
+  "_trace": "Seneste positioner, så kortet kan tegne den tilbagelagte vej. Beskæres til 300 punkter. Slettes efter eventet — se privatlivspolitikken.",
+
+  "walkers": [
+    {
+      "id": "marcelo",
+      "name": "Marcelo",
+      "twitch": "marcelo",
+      "status": "gaar",
+      "note": "",
+      "km": 0
+    },
+    {
+      "id": "wendelbo",
+      "name": "Wendelbo",
+      "twitch": "",
+      "status": "gaar",
+      "note": "",
+      "km": 0
+    },
+    {
+      "id": "aggo",
+      "name": "Aggo",
+      "twitch": "",
+      "status": "gaar",
+      "note": "",
+      "km": 0
+    }
+  ],
+  "_walkerStatus": "gaar | pause | ude",
+
+  "weather": { "text": null, "tempC": null, "at": null },
+
+  "counters": {
+    "blisters": 0,
+    "breaks": 0,
+    "hoursSlept": 0,
+    "coffees": 0,
+    "wrongTurns": 0
+  },
+
+  "donations": {
+    "total": 0,
+    "currency": "kr.",
+    "charity": { "name": null, "goal": 0, "url": null }
+  },
+
+  "sponsor": {
+    "name": "POWER",
+    "url": "https://power.dk",
+    "label": "Powerwalk er lavet i samarbejde med POWER",
+    "disclosure": "Reklame",
+    "_note": "disclosure vises tydeligt øverst på siden. Markedsføringsloven kræver, at kommercielt samarbejde er markeret. Lad den stå."
+  },
+
+  "meetups": [],
+  "_meetups": "Steder og tidspunkter hvor folk kan møde op og gå med. { at, place, note }",
+
+  "log": [],
+  "_log": "Dagbogen. Nyeste sidst. { at, km, title, text, author, photo, spoiler }",
+
+  "ailments": [],
+  "_ailments": "Vabler og skavanker. { at, who, what, note }",
+
+  "quotes": [],
+  "bounties": [],
+  "poll": { "id": null, "question": null, "options": [], "resolved": null },
+  "predictions": [],
+  "guests": []
+}

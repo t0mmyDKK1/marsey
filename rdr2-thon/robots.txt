@@ -1,0 +1,8 @@
+# RDR2-Thon
+# HUSK: udskift domænet nedenfor med det rigtige, før launch.
+
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: https://rdr2thon.dk/sitemap.xml
