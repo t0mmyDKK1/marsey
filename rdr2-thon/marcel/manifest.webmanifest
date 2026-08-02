@@ -1,9 +1,0 @@
-{
-  "name": "Marcelo",
-  "short_name": "Marcelo",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f5f0e6",
-  "theme_color": "#f5f0e6",
-  "icons": [{"src":"./favicon.svg","sizes":"any","type":"image/svg+xml"}]
-}
