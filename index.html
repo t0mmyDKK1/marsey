@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#16120f" />
+    <meta
+      name="description"
+      content="RDR2-Thon: Marcel spiller Red Dead Redemption II fra første scene til sidste mission i én sammenhængende dansk Twitch-stream. Uret kører døgnet rundt og kan ikke købes længere."
+    />
+
+    <!-- Domænet er marsey.dk. Ændres det, skal sitemap.xml, robots.txt og
+         marcel/index.html rettes med — de har alle absolutte adresser. -->
+    <link rel="canonical" href="https://marsey.dk/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RDR2-Thon" />
+    <meta property="og:locale" content="da_DK" />
+    <meta property="og:url" content="https://marsey.dk/" />
+    <meta
+      property="og:title"
+      content="RDR2-Thon — ét spil, én stream, syv dage"
+    />
+    <meta
+      property="og:description"
+      content="Marcel spiller hele Red Dead Redemption II i én sammenhængende stream. Uret stopper først, når historien er slut — og ingen donation kan forlænge det."
+    />
+    <meta property="og:image" content="https://marsey.dk/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="RDR2-Thon — en rytter i solnedgangen over titlen Red Dead Redemption II-Thon."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="RDR2-Thon — ét spil, én stream, syv dage"
+    />
+    <meta
+      name="twitter:description"
+      content="Marcel spiller hele Red Dead Redemption II i én sammenhængende stream. Uret stopper først, når historien er slut."
+    />
+    <meta
+      name="twitter:image"
+      content="https://marsey.dk/assets/og-image.jpg"
+    />
+
+    <link rel="icon" href="./assets/icon-32.png" sizes="32x32" />
+    <link rel="icon" href="./assets/icon-512.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="./assets/icon-180.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- imagesrcset skal matche image-set i style.css, ellers henter
+         browseren baade 1x og 2x af det stoerste billede paa siden. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      fetchpriority="high"
+      media="(min-width:761px)"
+      href="./assets/rdr2-thon-poster.avif"
+      imagesrcset="./assets/rdr2-thon-poster.avif 1x, ./assets/rdr2-thon-poster@2x.avif 2x"
+    />
+    <link
+      rel="preload"
+      href="./assets/rdr2-thon-poster-1200.avif"
+      as="image"
+      type="image/avif"
+      fetchpriority="high"
+      media="(max-width:760px)"
+    />
+    <link
+      rel="preload"
+      href="./assets/redemption.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./assets/bitter-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <!-- MIDLERTIDIGT DEMOPANEL — slet denne linje og pitch.css, naar siden gaar i luften -->
+    <link rel="stylesheet" href="./pitch.css" />
+    <title>RDR2-Thon — Marcel spiller hele Red Dead Redemption II live</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "RDR2-Thon — Red Dead Redemption II i én stream",
+        "description": "Marcel spiller Red Dead Redemption II fra begyndelsen til gennemført historie inklusive epilogen i én sammenhængende dansk Twitch-stream. Uret fortsætter under pauser og søvn.",
+        "startDate": "2026-08-10T14:00:00+02:00",
+        "endDate": "2026-08-17T14:00:00+02:00",
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "inLanguage": "da",
+        "isAccessibleForFree": true,
+        "image": ["https://marsey.dk/assets/og-image.jpg"],
+        "url": "https://marsey.dk/",
+        "location": {
+          "@type": "VirtualLocation",
+          "url": "https://twitch.tv/marcelo"
+        },
+        "organizer": {
+          "@type": "Person",
+          "name": "Marcel",
+          "alternateName": "Marcelo",
+          "url": "https://twitch.tv/marcelo"
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "Marcel",
+          "url": "https://twitch.tv/marcelo"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Gå til indhold</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <div class="cursor-spark" aria-hidden="true"></div>
+    <aside class="scene-rail" aria-hidden="true">
+      <span class="scene-number">00</span><i></i
+      ><span class="scene-name">FORSIDEN</span>
+    </aside>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="RDR2-Thon forside">
+        <span class="brand-mark" aria-hidden="true">R2</span>
+        <span class="brand-title"><b>RDR II</b><small>THON</small></span>
+      </a>
+      <button
+        class="menu-button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        Menu
+      </button>
+      <nav id="main-nav" aria-label="Primær navigation">
+        <a href="#watch">Se med</a>
+        <a href="#journey">Livekort</a>
+        <a href="#timeline">Tidslinje</a>
+        <a href="#journal">Journal</a>
+        <a href="#dispatches">Avisen</a>
+        <a href="#faq">FAQ</a>
+        <div class="nav-controls">
+          <button id="radio-open" type="button" title="Skift til radio">
+            Radio
+          </button>
+          <button
+            id="motion-toggle"
+            type="button"
+            aria-pressed="false"
+            title="Slå animationer fra"
+          >
+            Ro
+          </button>
+          <button
+            id="spoiler-toggle"
+            type="button"
+            aria-pressed="false"
+            title="Skjul spoilere"
+          >
+            Spoilerfri
+          </button>
+        </div>
+      </nav>
+      <div class="header-timer" aria-label="Eventtimer">
+        <span data-header-label>BEGYNDER OM</span><b data-header-time>—</b>
+      </div>
+      <a
+        class="button button-small header-cta"
+        href="https://twitch.tv/marcelo"
+        target="_blank"
+        rel="noreferrer"
+        >Twitch <span aria-hidden="true">↗</span></a
+      >
+    </header>
+
+    <div class="stale-banner" id="stale-banner" role="status" hidden>
+      Lejrstatus er ikke opdateret et stykke tid. Tallene herunder kan være
+      bagud — streamen er kilden.
+      <b data-stale-since></b>
+    </div>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-art" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="live-dot" aria-hidden="true"></span> Marcelo
+            præsenterer · 10. august 2026 kl. 14.00
+          </p>
+          <h1>
+            <span>Red Dead</span>
+            <span class="title-line">Redemption</span>
+            <span class="roman-lockup"
+              ><b>II</b><strong>THON</strong>
+              <span class="lockup-vertical" aria-hidden="true"></span>
+            </span>
+          </h1>
+          <p class="official-tagline">
+            Ét spil. Én stream.<br />Uret stopper først, når historien er slut.
+          </p>
+          <p class="lede">
+            Marcel spiller hele historien i én sammenhængende stream, der kører
+            døgnet rundt — også under måltider, pauser og søvn.
+            <b>Ingen donation kan forlænge det.</b>
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button"
+              href="https://twitch.tv/marcelo"
+              target="_blank"
+              rel="noreferrer"
+              >Se på Twitch <span aria-hidden="true">↗</span></a
+            >
+            <button class="button cream" id="calendar-button" type="button">
+              Læg i kalender
+            </button>
+            <span id="calendar-status" role="status"></span>
+          </div>
+          <p class="hero-rules-link">
+            <a class="text-link" href="#about"
+              >Læs reglerne og hvornår uret stopper</a
+            >
+          </p>
+        </div>
+        <div class="countdown">
+          <p id="countdown-label">Tid til vi rider ud</p>
+          <div aria-hidden="true">
+            <strong data-days>00</strong><span>DAG</span><i>:</i
+            ><strong data-hours>00</strong><span>TIM</span><i>:</i
+            ><strong data-minutes>00</strong><span>MIN</span><i>:</i
+            ><strong data-seconds>00</strong><span>SEK</span>
+          </div>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span></span> Rid ned</div>
+        <div class="hero-ghost-type" aria-hidden="true">
+          OUTLAWS<br />FOREVER
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="Eventdetaljer">
+        <div aria-hidden="true">
+          Én sammenhængende stream <b>✦</b> Estimeret 7 dage <b>✦</b> Live
+          døgnet rundt <b>✦</b> Uret kan ikke købes længere <b>✦</b> Én
+          sammenhængende stream <b>✦</b> Estimeret 7 dage <b>✦</b>
+        </div>
+        <p class="visually-hidden">
+          Én sammenhængende stream. Estimeret syv dage. Live døgnet rundt. Uret
+          kan ikke købes længere.
+        </p>
+      </section>
+
+      <!-- ================================================== DAGENS CITAT === -->
+      <section
+        class="quote-band"
+        id="quote-band"
+        aria-label="Dagens citat"
+        hidden
+      >
+        <blockquote data-quote-text></blockquote>
+        <cite data-quote-meta></cite>
+      </section>
+
+      <!-- ========================================================= BÅLET === -->
+      <section
+        class="campfire"
+        id="campfire"
+        aria-labelledby="campfire-title"
+        hidden
+      >
+        <div class="campfire-glow" aria-hidden="true"></div>
+        <div class="campfire-inner">
+          <p class="kicker">Natlejren</p>
+          <h2 id="campfire-title">
+            Marcel sover.<br /><em>Uret gør ikke.</em>
+          </h2>
+          <p class="campfire-wake" data-campfire-wake></p>
+
+          <!-- Natlejren. Hele landskabet er tegnet i CSS: måne, stjerner,
+               bjergrygge, granskov, sø med genskin og en flok fugle. Streamen
+               står midt i det, og bålet brænder foran den. -->
+          <div class="night-scene">
+            <div class="nightsky" aria-hidden="true" data-nightsky>
+              <span class="moon"></span>
+              <span class="birds"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+
+            <span class="ridge ridge-far" aria-hidden="true"></span>
+            <span class="ridge ridge-mid" aria-hidden="true"></span>
+            <span class="treeline" aria-hidden="true"
+              ><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+              ><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+            ></span>
+            <span class="ridge ridge-near" aria-hidden="true"></span>
+            <span class="lake" aria-hidden="true"
+              ><i></i><i></i><i></i><i></i><i></i
+            ></span>
+
+            <div class="camp-stage">
+              <div class="camp-screen" data-camp-dock>
+                <div class="camp-screen-frame">
+                  <div class="camp-idle" data-camp-idle>
+                    <b>Streamen kører</b>
+                    <p>Den er slukket her, indtil du selv tænder for den.</p>
+                    <button
+                      class="button button-small"
+                      type="button"
+                      data-embed-accept
+                    >
+                      Tænd streamen
+                    </button>
+                  </div>
+                </div>
+                <span class="camp-screen-glow" aria-hidden="true"></span>
+              </div>
+
+              <!-- Ildstedet. Alt herunder er tegnet i CSS. -->
+              <div class="firepit" aria-hidden="true">
+                <span class="pit-heat"></span>
+                <span class="pit-stones"
+                  ><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                ></span>
+                <span class="logs"><i></i><i></i><i></i></span>
+                <!-- Fire flade lag: roed, orange, gul og den hvide kerne. -->
+                <span class="flames">
+                  <i class="f1"></i><i class="f2"></i><i class="f3"></i
+                  ><i class="f4"></i>
+                </span>
+                <span class="sparks">
+                  <i></i><i></i><i></i><i></i><i></i><i></i> <i></i><i></i
+                  ><i></i><i></i><i></i><i></i>
+                </span>
+                <span class="smoke"><i></i><i></i><i></i></span>
+              </div>
+
+              <span class="ground-pool" aria-hidden="true"></span>
+
+              <!-- Pladserne omkring bålet. En træstub pr. plads, og en
+                   siddende skikkelse på de pladser der er taget. Bygges i
+                   features.js ud fra nattevagtens rigtige tal. -->
+              <div class="seats" data-seats aria-hidden="true"></div>
+            </div>
+
+            <!-- Buske i forgrunden. De får bålets kant af lys på indersiden. -->
+            <span class="fg fg-left" aria-hidden="true"
+              ><i></i><i></i><i></i><i></i
+            ></span>
+            <span class="fg fg-right" aria-hidden="true"
+              ><i></i><i></i><i></i><i></i><i></i
+            ></span>
+            <span class="grain" aria-hidden="true"></span>
+          </div>
+
+          <!-- Nattevagten. Pladserne omkring bålet står inde i selve scenen;
+               her står kun tallet og forklaringen. -->
+          <p class="watch-title">
+            <b data-watch-count>—</b>
+            <span data-watch-label>Du holder vagt ved bålet.</span>
+          </p>
+
+          <!-- Søvnfasen er der, hvor folk falder fra. Det her er vejen
+               tilbage: en besked, når han er oppe igen. -->
+          <div class="wake-box" data-wake-box>
+            <p class="wake-copy" data-wake-copy>
+              Skal vi sige til, når han vågner?
+            </p>
+            <div class="wake-actions">
+              <button class="button cream" type="button" data-wake-me>
+                Vækk mig når han vågner
+              </button>
+              <a class="button" data-wake-cal hidden>Læg i kalender</a>
+            </div>
+            <p class="wake-note" data-wake-note></p>
+          </div>
+
+          <div class="campfire-actions">
+            <button
+              class="button cream"
+              id="campfire-sound"
+              type="button"
+              aria-pressed="false"
+            >
+              Tænd bålet 🔊
+            </button>
+            <button class="button" id="radio-open-2" type="button" hidden>
+              Radio
+            </button>
+          </div>
+
+          <div class="embers" data-campfire-rotate aria-live="off"></div>
+          <p class="campfire-foot">
+            Streamen kører videre hele natten. Der sker bare ikke så meget.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================== AFSLUTNINGSSKÆRM === -->
+      <section class="ended-panel" aria-labelledby="ended-title">
+        <p class="kicker">Rejsen er slut</p>
+        <h2 id="ended-title">Historien <em>er slut.</em></h2>
+        <p class="ended-time">Uret stoppede efter <b data-final-time>—</b></p>
+        <div class="ended-stats">
+          <div><b data-final-pages>0</b><span>journalsider</span></div>
+          <div><b data-final-entries>0</b><span>community-bidrag</span></div>
+          <div><b data-final-fasttravels>0</b><span>fast travels</span></div>
+        </div>
+        <div class="ended-actions">
+          <a class="button" href="#journal">Se hele rejsen i Journalen</a>
+          <a
+            class="button cream"
+            href="https://twitch.tv/marcelo/videos"
+            target="_blank"
+            rel="noreferrer"
+            >Se optagelsen ↗</a
+          >
+        </div>
+      </section>
+
+      <!-- ==================================================== DONATIONER === -->
+      <section
+        class="donation-band"
+        id="donation-band"
+        aria-label="Indsamling"
+        hidden
+      >
+        <p class="donation-line">
+          I har doneret <b data-donation-total>0 kr.</b><br />
+          Det har forlænget uret med <em>0 sekunder.</em>
+        </p>
+        <div class="donation-goal" data-donation-goal hidden>
+          <p>Pengene går ubeskåret til <b data-charity-name></b>.</p>
+          <div class="charity-bar" data-charity-bar><i></i></div>
+          <small data-charity-goal></small>
+          <a
+            class="text-link"
+            data-charity-link
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            >Læs om indsamlingen ↗</a
+          >
+        </div>
+      </section>
+
+      <!-- ================================================ KONVERTERING ==== -->
+      <section class="capture-block" id="join" aria-labelledby="capture-title">
+        <div class="capture-copy">
+          <p class="kicker">Vær med fra første skud</p>
+          <h2 id="capture-title">Rid med.</h2>
+          <p>
+            Kanalen er stille indtil den 10. august. Sørg for, at du får besked,
+            når vi rider ud.
+          </p>
+        </div>
+        <div class="capture-actions">
+          <a
+            class="button"
+            href="https://twitch.tv/marcelo"
+            target="_blank"
+            rel="noreferrer"
+            >Følg på Twitch <span aria-hidden="true">↗</span></a
+          >
+          <a
+            class="button cream"
+            data-discord
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            >Discord <span aria-hidden="true">↗</span></a
+          >
+          <div class="capture-newsletter" data-newsletter hidden>
+            <form method="post">
+              <label for="capture-email">Få én besked, når vi starter</label>
+              <div>
+                <input
+                  id="capture-email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="din@mail.dk"
+                />
+                <button class="button button-small" type="submit">
+                  Giv mig besked
+                </button>
+              </div>
+              <small
+                >Én mail når vi rider ud. Én når historien er slut. Ikke
+                andet.</small
+              >
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reglerne står tidligt, fordi de forklarer løftet før alle live-detaljerne. -->
+      <section class="rules-section rules-section-early" id="about">
+        <div class="rules-emblem" aria-hidden="true">
+          <span>ÉT SPIL</span><b>II</b><span>ÉN STREAM</span>
+        </div>
+        <div class="rules-copy">
+          <p class="kicker light">Det vilde vestens kodeks</p>
+          <h2>Tre regler.<br /><em>Ingen undskyldninger.</em></h2>
+          <ol>
+            <li>
+              <span aria-hidden="true">01</span>
+              <div>
+                <b>Ingen fast travel</b>
+                <p>
+                  Skal vi nogen steder, kommer hesten med. Tælleren står i
+                  lejrstatus.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span aria-hidden="true">02</span>
+              <div>
+                <b>Chatten holder tøjlerne</b>
+                <p>
+                  Dusører, navne og dagens dom afgøres af jer. Opslagstavlen
+                  åbner, når vi rider ud.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span aria-hidden="true">03</span>
+              <div>
+                <b>Uret fortsætter</b>
+                <p>
+                  Pauser, måltider og søvn er en del af rejsen. Stream og
+                  elapsed-timer kører døgnet rundt.
+                </p>
+              </div>
+            </li>
+          </ol>
+          <div class="end-condition">
+            <p class="kicker">Hvornår stopper uret?</p>
+            <p>
+              Uret stopper, når rulleteksterne ruller efter epilogens sidste
+              mission, <b>“American Venom”</b>. Ikke før. Ikke efter.
+            </p>
+            <p>
+              Sidemissioner, samleobjekter og 100 % completion tæller ikke med —
+              og trækker heller ikke fra. Opstår der tvivl, afgør produktionen
+              det live på stream, og den afgørelse er endelig.
+            </p>
+          </div>
+          <a
+            class="button cream"
+            href="https://twitch.tv/marcelo"
+            target="_blank"
+            rel="noreferrer"
+            >Slut dig til banden <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+
+      <section class="command-section" id="camp" aria-labelledby="camp-title">
+        <div class="command-heading">
+          <p class="kicker light">The Living Frontier</p>
+          <h2 id="camp-title">Lejrens<br /><em>kommandobord.</em></h2>
+          <p>Seks genstande. Seks veje ind i lejren.</p>
+        </div>
+        <div class="command-table">
+          <div class="lantern" aria-hidden="true"><i></i><span></span></div>
+          <a class="table-object pocket-watch" href="#watch">
+            <span class="watch-chain" aria-hidden="true"></span
+            ><i aria-hidden="true"></i> <b>Se med</b
+            ><small>STREAM &amp; CHAT</small>
+          </a>
+          <a class="table-object folded-map" href="#journey">
+            <span aria-hidden="true"></span><i aria-hidden="true"></i>
+            <b>Kortet</b><small>RUTEN GENNEM SYV DAGE</small>
+          </a>
+          <a class="table-object table-telegram" href="#timeline">
+            <strong>TELEGRAM</strong><span>PROGRAM</span
+            ><small>STOP · ÅBN FOR TIDER · STOP</small>
+          </a>
+          <a class="table-object newspaper" href="#dispatches">
+            <small>THE FRONTIER GAZETTE</small><b>Morgen<br />avisen</b
+            ><span>Ny udgave hver dag</span>
+          </a>
+          <a class="table-object journal-stack" href="#journal">
+            <i aria-hidden="true"></i><span aria-hidden="true"></span
+            ><b>The<br />Journal</b><small>COMMUNITY ARCHIVE</small>
+          </a>
+          <a class="table-object camp-journal" href="#about">
+            <span>RDR II</span><b>Regler<br />&amp; kodeks</b
+            ><small>PERSONLIGT · FORTROLIGT</small>
+          </a>
+          <div class="table-stamp" aria-hidden="true">MARCelo<br />2026</div>
+        </div>
+      </section>
+
+      <section class="watch-section section" id="watch">
+        <div class="chapter-mark" aria-hidden="true">
+          <span>Akt I</span><b>Streamen</b>
+        </div>
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Direkte fra lejren</p>
+            <h2>Se med <em>live.</em></h2>
+          </div>
+          <p>
+            Slå dig ned ved bålet. Chatten følger rejsen, mens Marcel spiller
+            historien fra start til slut.
+          </p>
+        </div>
+
+        <div class="missed-box" data-missed hidden>
+          <b>Mens du var væk</b>
+          <p data-missed-summary></p>
+          <a class="text-link" href="#journal">Læs journalen →</a>
+        </div>
+
+        <div class="plain-box" id="plain-language" hidden>
+          <b>Hvad sker der lige nu?</b>
+          <p data-plain-text></p>
+          <small
+            >Fortalt uden spoilere, fordi du sagde du ikke har spillet
+            spillet.</small
+          >
+        </div>
+
+        <div class="stream-shell">
+          <div class="stream-topbar">
+            <span><i aria-hidden="true"></i> TWITCH</span
+            ><strong>Marcel · Red Dead Redemption II</strong><b>Dansk stream</b>
+          </div>
+          <div class="stream-frame">
+            <div class="saloon-doors" aria-hidden="true">
+              <div class="saloon-door door-left">
+                <span></span><i></i><b>LIVE</b>
+              </div>
+              <div class="saloon-door door-right">
+                <span></span><i></i><b>14:00</b>
+              </div>
+            </div>
+            <iframe
+              id="twitch-player"
+              title="Marcels Twitch-stream"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+
+            <div class="embed-gate" data-embed-gate>
+              <span class="play-icon" aria-hidden="true">▶</span>
+              <p class="gate-pre">Portene åbner 10. august kl. 14.00.</p>
+              <p class="gate-note">
+                Afspilleren indlæses fra Twitch, som sætter cookies på din
+                enhed.
+              </p>
+              <div class="gate-actions">
+                <button class="button" type="button" data-embed-accept>
+                  Indlæs afspiller
+                </button>
+                <a
+                  class="text-link"
+                  href="https://twitch.tv/marcelo"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Se på Twitch i stedet ↗</a
+                >
+              </div>
+              <p class="gate-legal">
+                <a href="./privatliv.html">Sådan behandler vi data</a>
+              </p>
+            </div>
+
+            <div class="sleep-overlay" aria-hidden="true">
+              <b>Marcel sover</b>
+              <p>Streamen kører videre. Det gør uret også.</p>
+              <span data-sleep-wake hidden></span>
+            </div>
+          </div>
+          <div class="stream-footer">
+            <span>@marcelo</span><span>RDR2 · Dansk · 18+</span>
+          </div>
+        </div>
+
+        <div class="live-dashboard">
+          <article class="live-info">
+            <p class="kicker">Lejrstatus</p>
+            <div class="status-line">
+              <span class="status-lantern" aria-hidden="true"></span
+              ><strong data-event-status>VENTER PÅ AFGANG</strong>
+            </div>
+            <dl>
+              <div>
+                <dt>Tid</dt>
+                <dd data-compact-time>—</dd>
+              </div>
+              <div>
+                <dt>Kapitel</dt>
+                <dd data-current-chapter>Prolog</dd>
+              </div>
+              <div>
+                <dt>Mission</dt>
+                <dd data-current-mission>Ikke begyndt</dd>
+              </div>
+              <div>
+                <dt>Fremdrift</dt>
+                <dd data-progress-value>0%</dd>
+              </div>
+              <div>
+                <dt>Lejr</dt>
+                <dd data-camp-name>—</dd>
+              </div>
+              <div>
+                <dt>Fast travels</dt>
+                <dd data-counter-fasttravels>0</dd>
+              </div>
+              <div>
+                <dt>Dødsfald</dt>
+                <dd data-counter-deaths>0</dd>
+              </div>
+            </dl>
+            <p class="updated-line">
+              Opdateret <span data-updated>ukendt</span>
+            </p>
+            <div class="info-actions">
+              <a
+                class="button button-small"
+                href="https://twitch.tv/marcelo"
+                target="_blank"
+                rel="noreferrer"
+                >Åbn Twitch ↗</a
+              >
+            </div>
+          </article>
+
+          <article class="chat-panel">
+            <div class="chat-heading">
+              <div><span aria-hidden="true"></span><b>Twitch chat</b></div>
+              <button id="chat-toggle" type="button" aria-expanded="true">
+                Skjul
+              </button>
+            </div>
+            <div class="chat-body">
+              <iframe
+                id="twitch-chat"
+                title="Marcels Twitch-chat"
+                loading="lazy"
+              ></iframe>
+              <div class="embed-gate chat-gate" data-embed-gate>
+                <p>Chatten indlæses fra Twitch, som sætter cookies.</p>
+                <button
+                  class="button button-small"
+                  type="button"
+                  data-embed-accept
+                >
+                  Indlæs chat
+                </button>
+              </div>
+            </div>
+            <a
+              href="https://twitch.tv/marcelo/chat"
+              target="_blank"
+              rel="noreferrer"
+              >Åbn chat på Twitch ↗</a
+            >
+          </article>
+        </div>
+
+        <!-- ============================================= HESTEN + DIN REJSE -->
+        <div class="side-cards">
+          <article class="horse-card" id="horse-card">
+            <p class="kicker">Bandens hest</p>
+            <b class="horse-name unnamed" data-horse-name>Uden navn endnu</b>
+            <p class="horse-meta" data-horse-meta>
+              Chatten bestemmer hvad den skal hedde.
+            </p>
+            <div class="horse-vote" data-horse-vote hidden></div>
+          </article>
+
+          <article class="journey-card" id="journey-card" hidden>
+            <p class="kicker">Din rejse</p>
+            <div class="journey-facts" data-journey-facts></div>
+            <p class="journey-line" data-journey-line></p>
+            <button
+              class="button button-small cream"
+              type="button"
+              data-journey-share
+            >
+              Gem som billede
+            </button>
+            <small>Gemmes kun på din egen enhed. Vi ser det aldrig.</small>
+          </article>
+        </div>
+      </section>
+
+      <!-- Kortet tegner kun ankre, produktionen selv har sat flag ved i
+           admin. Derfor kan det aldrig løbe foran streamen — og derfor er
+           spoilerfri tilstand et spørgsmål om at udelade punkter, ikke om at
+           sløre dem: sløret tekst på et beige kort forsvinder alligevel. -->
+      <section
+        class="live-map-section"
+        id="journey"
+        aria-labelledby="journey-title"
+      >
+        <div class="live-map-heading">
+          <div>
+            <p class="kicker light">Direkte fra spilverdenen</p>
+            <h2 id="journey-title">Hvor er Marcel<br /><em>lige nu?</em></h2>
+          </div>
+          <div class="live-map-readout" aria-live="polite">
+            <span data-map-status>Ikke redet ud</span>
+            <strong data-map-location>Rejsen begynder 10. august</strong>
+            <small data-map-chapter>Prolog</small>
+            <!-- Tallet står ved siden af sin egen tekst. Står det alene før
+                 bjælken, ligner et "0" i Redemption-fonten en tilfældig
+                 streg frem for et tal. -->
+            <p class="live-map-progress">
+              <b data-map-count>0</b>
+              <span data-map-total>af 9 ankre</span>
+              <i data-map-bar aria-hidden="true"><u style="width: 0%"></u></i>
+            </p>
+          </div>
+        </div>
+        <figure class="world-map-frame">
+          <div class="world-map" data-live-map>
+            <picture>
+              <source
+                type="image/webp"
+                media="(max-width: 700px)"
+                srcset="./assets/rdr2-world-map-900.webp"
+              />
+              <source type="image/webp" srcset="./assets/rdr2-world-map.webp" />
+              <img
+                class="world-map-image"
+                src="./assets/rdr2-world-map.png"
+                width="1675"
+                height="939"
+                loading="lazy"
+                decoding="async"
+                alt="Kort over spillets verden med bjerge, floder og byer."
+              />
+            </picture>
+            <!-- preserveAspectRatio=none, fordi billedet strækkes med
+                 object-fit:fill. Kun når begge strækker ens, sidder nålene
+                 præcis der, hvor mapX/mapY siger. -->
+            <svg
+              class="world-map-art"
+              viewBox="0 0 1000 560"
+              preserveAspectRatio="none"
+              role="group"
+              aria-label="Bandens ankre på kortet"
+            >
+              <path class="world-map-trail" data-map-trail fill="none" />
+              <g data-map-pins></g>
+            </svg>
+            <svg
+              class="world-map-compass"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+            >
+              <circle cx="50" cy="50" r="30" />
+              <path d="M50 12 L58 50 L50 88 L42 50 Z" class="compass-needle" />
+              <path d="M12 50h12M76 50h12M50 12v-6" />
+              <text x="50" y="8">N</text>
+            </svg>
+            <p class="world-map-empty" data-map-empty>
+              Det første flag sættes, når Marcel rider ud.
+            </p>
+          </div>
+          <figcaption class="world-map-caption">
+            <ul class="world-map-legend" data-map-legend>
+              <li class="is-current"><i aria-hidden="true"></i>Her nu</li>
+              <li class="is-reached"><i aria-hidden="true"></i>Passeret</li>
+              <li class="is-planned" data-map-legend-planned>
+                <i aria-hidden="true"></i>Venter forude
+              </li>
+            </ul>
+            <p class="world-map-readout" data-map-detail role="status">
+              Vælg en markør for at se hvornår banden var der.
+            </p>
+          </figcaption>
+        </figure>
+        <p class="live-map-note">
+          Flaget flyttes i hånden, når banden faktisk er ankommet — kortet løber
+          aldrig foran streamen. Med spoilerfri slået til vises kun de steder, I
+          allerede har set.
+        </p>
+      </section>
+
+      <!-- ===================================================== TIDSLINJEN === -->
+      <section
+        class="timeline-section"
+        id="timeline"
+        aria-labelledby="timeline-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="kicker">168 timer</p>
+            <h2 id="timeline-title">Hele rejsen<br /><em>på én linje.</em></h2>
+          </div>
+          <p>
+            <b>Stiplede markeringer er gæt, ikke aftaler.</b> Marcel bestemmer
+            selv tempo, pauser og søvn — linjen er vores bedste bud, indtil
+            noget faktisk er sket. Udfyldte markeringer er hændelser, vi har
+            set. Prikkerne er dine egne besøg.
+          </p>
+        </div>
+        <ul class="timeline-legend">
+          <li class="is-done"><i aria-hidden="true"></i>Det er sket</li>
+          <li class="is-fixed"><i aria-hidden="true"></i>Aftalt på forhånd</li>
+          <li class="is-guess"><i aria-hidden="true"></i>Forventet</li>
+          <li class="is-sleep"><i aria-hidden="true"></i>Søvn</li>
+        </ul>
+        <div class="timeline-wrap">
+          <div class="timeline" data-timeline></div>
+          <i
+            class="timeline-now"
+            data-timeline-now
+            aria-hidden="true"
+            hidden
+          ></i>
+        </div>
+        <div class="timeline-readout" data-timeline-readout role="status">
+          <b>Vælg et punkt på linjen</b
+          ><span>Så viser vi hvad der sker der.</span>
+        </div>
+        <div class="guest-board" id="guests" hidden>
+          <p class="kicker">Gæster på vej</p>
+          <ul data-guests></ul>
+        </div>
+      </section>
+
+      <section
+        class="manifesto trail-telegram"
+        aria-label="Praktiske eventoplysninger"
+      >
+        <span class="telegram-label">URGENT TELEGRAM</span>
+        <p><b>AFGANG</b> 10. AUGUST · 14:00</p>
+        <i aria-hidden="true">✦</i>
+        <p><b>VARIGHED</b> CIRKA 7 DAGE</p>
+        <i aria-hidden="true">✦</i>
+        <p><b>DESTINATION</b> TWITCH.TV/MARCELO</p>
+      </section>
+
+      <!-- ======================================================= DUSØRER === -->
+      <section
+        class="bounty-section"
+        id="bounties"
+        aria-labelledby="bounties-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="kicker light">Chatten holder tøjlerne</p>
+            <h2 id="bounties-title">Dagens<br /><em>dusører.</em></h2>
+          </div>
+          <p>
+            Community foreslår udfordringer. Produktionen godkender. Marcel har
+            intet valg. Send dit forslag via Journalen.
+          </p>
+        </div>
+        <ul class="bounty-list" data-bounty-list></ul>
+        <p class="empty-note" data-bounty-empty>
+          Opslagstavlen er tom indtil vi rider ud den 10. august.
+        </p>
+      </section>
+
+      <!-- ===================================================== BOOT HILL === -->
+      <section
+        class="boothill-section"
+        id="boothill"
+        aria-labelledby="boothill-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="kicker light">Boot Hill</p>
+            <h2 id="boothill-title">Kirkegården.</h2>
+          </div>
+          <p>
+            <b data-graves-count>0</b> gange er det gået galt indtil videre.
+            Hver enkelt har fået sin egen sten.
+          </p>
+        </div>
+        <ul class="graveyard" data-graves></ul>
+        <p class="empty-note" data-graves-empty>
+          Ingen er døde endnu. Det holder næppe hele ugen.
+        </p>
+      </section>
+
+      <section
+        class="dispatch-section"
+        id="dispatches"
+        aria-labelledby="dispatch-title"
+      >
+        <div class="dispatch-copy">
+          <p class="kicker light">Tryksværten er stadig våd</p>
+          <h2 id="dispatch-title">Morgen-<br /><em>avisen.</em></h2>
+          <p>
+            Hver morgen sætter vi en ny udgave af Frontier Gazette. Syv udgaver
+            bliver til eventets bog.
+          </p>
+          <div class="update-feed" data-dispatches>
+            <article>
+              <time datetime="2026-07-29T12:00:00+02:00">29. JUL · 12:00</time
+              ><b>Lejren er under opbygning</b>
+              <p>Kommandobordet er åbnet. Vi gør klar til afgang.</p>
+            </article>
+          </div>
+          <div class="gazette-archive" data-gazette-archive hidden>
+            <p class="kicker">Tidligere udgaver</p>
+            <div class="gazette-list" data-gazette-list></div>
+          </div>
+        </div>
+
+        <article
+          class="frontier-paper"
+          data-gazette
+          aria-label="Frontier Gazette"
+        >
+          <header>
+            <span>THE</span><strong>FRONTIER GAZETTE</strong
+            ><small data-g-edition>10 CENTS</small>
+          </header>
+          <div class="paper-rule" aria-hidden="true"></div>
+
+          <p class="paper-empty" data-gazette-empty>
+            <b>Første udgave udkommer 11. august.</b>
+            Fra da af sætter vi en ny forside hver morgen, når Marcel vågner.
+          </p>
+
+          <div data-gazette-body hidden>
+            <p class="paper-date" data-g-date></p>
+            <h3 data-g-headline></h3>
+            <p class="paper-lede" data-g-lede></p>
+            <div class="paper-columns">
+              <div
+                class="paper-image"
+                role="img"
+                aria-label="En rytter i solnedgangen"
+              ></div>
+              <p class="paper-stats" data-g-stats></p>
+            </div>
+            <blockquote class="paper-quote" data-g-quote hidden>
+              <b></b><small></small>
+            </blockquote>
+            <a
+              class="paper-clip"
+              data-g-clip
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+              hidden
+              >Se nattens klip ↗</a
+            >
+            <p class="paper-ad" data-g-ad hidden></p>
+            <div class="paper-footer">
+              <b>INGEN GENVEJE</b><span>HELE HISTORIEN</span><b>SYV DAGE</b>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section
+        class="journal-section section"
+        id="journal"
+        aria-labelledby="journal-title"
+      >
+        <div class="chapter-mark" aria-hidden="true">
+          <span>Akt III</span><b>Communityarkivet</b>
+        </div>
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Skrevet mens støvet lægger sig</p>
+            <h2 id="journal-title">The <em>Journal.</em></h2>
+          </div>
+          <p>
+            Eventets fælles hukommelse: klip, citater og små øjeblikke udvalgt
+            af produktionen og communityet.
+          </p>
+        </div>
+
+        <div class="journal-status">
+          <div><span>Aktuel dag</span><b data-journal-day>FØR EVENTET</b></div>
+          <div>
+            <span>Aktuelt kapitel</span
+            ><b data-journal-chapter>LEJREN BYGGES</b>
+          </div>
+          <div><span>Udgivne sider</span><b data-journal-pages>03</b></div>
+          <div>
+            <span>Community-bidrag</span><b data-journal-contributions>00</b>
+          </div>
+          <div><span>Elapsed</span><b data-journal-elapsed>—</b></div>
+        </div>
+
+        <div class="journal-toolbar">
+          <div
+            class="journal-days"
+            role="tablist"
+            aria-label="Vælg journaldag"
+            data-journal-days
+          >
+            <button
+              class="active"
+              data-journal-filter="all"
+              role="tab"
+              aria-selected="true"
+              aria-controls="journal-panel"
+              type="button"
+            >
+              Seneste
+            </button>
+            <button
+              data-journal-filter="0"
+              role="tab"
+              aria-selected="false"
+              aria-controls="journal-panel"
+              tabindex="-1"
+              type="button"
+            >
+              Før start
+            </button>
+          </div>
+          <button
+            class="button button-small"
+            id="journal-submit-open"
+            type="button"
+          >
+            Indsend et øjeblik
+          </button>
+        </div>
+
+        <article
+          class="open-journal"
+          id="journal-panel"
+          role="tabpanel"
+          tabindex="0"
+        >
+          <div class="journal-spine" aria-hidden="true"></div>
+          <section class="journal-page journal-page-left">
+            <div class="page-corner" aria-hidden="true"></div>
+            <div class="journal-entry-meta">
+              <span data-entry-day>FØR EVENTET</span><i aria-hidden="true">·</i>
+              <time data-entry-time>29. JUL · 12:00</time
+              ><i aria-hidden="true">·</i>
+              <span data-entry-elapsed>T–12 DAGE</span>
+            </div>
+            <p class="entry-category" data-entry-category>PRODUKTIONSNOTE</p>
+            <h3 data-entry-title>Lejren bliver bygget</h3>
+            <p class="entry-body" data-entry-body>
+              Kommandobordet er åbnet, kortet foldet ud, og de første sider
+              venter på at blive skrevet.
+            </p>
+            <blockquote data-entry-quote>
+              “Ét spil. Én stream. Uret stopper først, når historien er slut.”
+            </blockquote>
+            <div class="hand-note" data-entry-note>
+              Husk kaffe. Meget kaffe.
+            </div>
+            <div class="entry-tags" data-entry-tags></div>
+          </section>
+          <section class="journal-page journal-page-right">
+            <div class="journal-photo">
+              <div
+                class="journal-photo-image"
+                role="img"
+                aria-label="En rytter på vej mod solnedgangen"
+              ></div>
+              <small data-entry-photo-caption>Rejsen venter mod vest.</small>
+              <span class="photo-tape" aria-hidden="true"></span>
+            </div>
+            <div class="production-note">
+              <span>PRODUKTIONENS NOTE</span>
+              <p data-entry-production>Den første officielle journal-side.</p>
+            </div>
+            <div class="entry-credit">
+              <span>Indsendt af</span
+              ><b data-entry-credit>RDR2-Thon produktionen</b>
+            </div>
+            <div
+              class="spoiler-cover"
+              data-spoiler-cover
+              role="button"
+              tabindex="0"
+              hidden
+            >
+              <b>SPOILER</b><span>Tryk for at vise siden</span>
+            </div>
+          </section>
+        </article>
+
+        <div class="journal-page-controls">
+          <button class="plain-button" id="journal-prev" type="button">
+            ← Forrige side
+          </button>
+          <span
+            ><b data-journal-position>01</b> /
+            <span data-journal-total>01</span></span
+          >
+          <button class="plain-button" id="journal-next" type="button">
+            Næste side →
+          </button>
+          <button class="plain-button" id="journal-share" type="button">
+            Del siden
+          </button>
+        </div>
+
+        <div class="drafts-box" data-drafts hidden>
+          <b>Dine gemte kladder (<span data-drafts-count>0</span>)</b>
+          <p>
+            Disse bidrag kunne ikke sendes og ligger kun på denne enhed. Tryk
+            “Send igen”, når du har forbindelse — eller slet dem.
+          </p>
+          <ul data-drafts-list></ul>
+          <p class="drafts-status" data-drafts-status role="status"></p>
+        </div>
+
+        <div class="journal-community">
+          <article class="daily-verdict" data-poll>
+            <p class="kicker">Dagens dom</p>
+            <h3 data-poll-question>Dagens dom åbner, når vi rider ud</h3>
+            <div class="verdict-options" data-poll-options></div>
+            <small data-poll-note
+              >Vi viser ingen tal, før der er rigtige stemmer at vise.</small
+            >
+          </article>
+          <article class="honour-card" data-honour-card>
+            <span class="wax-seal" aria-hidden="true">H</span>
+            <p class="kicker">Honour Meter</p>
+            <h3 data-honour-label>Ikke målt endnu</h3>
+            <div class="honour-scale" data-honour-bar><i></i></div>
+            <p><b data-honour-value>—</b> honour</p>
+            <svg class="honour-chart" data-honour-chart hidden></svg>
+            <small data-honour-note
+              >Måleren åbner, når vi rider ud. Vi viser ikke tal, vi ikke
+              har.</small
+            >
+          </article>
+        </div>
+
+        <!-- ============================================== FORUDSIGELSER === -->
+        <div class="predictions" id="predictions">
+          <p class="kicker">Forudsigelser</p>
+          <h3>Hvad tror du der sker?</h3>
+          <div data-predictions></div>
+          <p class="empty-note" data-predictions-empty>
+            Første forudsigelse åbner, når vi rider ud.
+          </p>
+          <p
+            class="prediction-score"
+            data-prediction-score
+            role="status"
+            hidden
+          ></p>
+        </div>
+      </section>
+
+      <dialog
+        class="journal-dialog"
+        id="journal-dialog"
+        aria-labelledby="submission-title"
+      >
+        <form id="journal-submission-form">
+          <button class="dialog-close" type="button" aria-label="Luk formular">
+            ×
+          </button>
+          <p class="kicker">Community-indsendelse</p>
+          <h2 id="submission-title">Indsend et øjeblik.</h2>
+          <p>
+            Et klip, citat, øjeblik — eller en dusør til Marcel. Produktionen
+            læser alt og udvælger det bedste.
+          </p>
+          <div class="form-grid">
+            <label class="full"
+              ><span>Hvad sender du? *</span
+              ><select name="kind">
+                <option value="moment">Et øjeblik fra streamen</option>
+                <option value="bounty">Et forslag til en dusør</option>
+                <option value="quote">Et Marcel-citat</option>
+              </select></label
+            >
+            <label class="full"
+              ><span>Overskrift *</span
+              ><input name="title" required maxlength="90" autocomplete="off"
+            /></label>
+            <label class="full"
+              ><span>Twitch clip-link</span
+              ><input
+                name="clip_url"
+                type="url"
+                inputmode="url"
+                placeholder="https://clips.twitch.tv/…"
+              /><small class="field-hint"
+                >Skal være et clip fra Marcels kanal.</small
+              ></label
+            >
+            <label class="full"
+              ><span>Beskrivelse eller moment</span
+              ><textarea name="description" rows="4" maxlength="600"></textarea>
+            </label>
+            <label
+              ><span>Twitch-navn</span
+              ><input
+                name="twitch_name"
+                maxlength="40"
+                autocomplete="nickname"
+                placeholder="Eller vælg anonym nedenfor"
+            /></label>
+            <label
+              ><span>Kategori</span
+              ><select name="category">
+                <option>Gameplay</option>
+                <option>Sjovt øjeblik</option>
+                <option>Clutch</option>
+                <option>Fail</option>
+                <option>Gæst</option>
+                <option>Milepæl</option>
+                <option>Marcel-citat</option>
+                <option>Community</option>
+                <option>Søvn/pause</option>
+              </select></label
+            >
+            <label
+              ><span>Marcel-citat</span><input name="quote" maxlength="180"
+            /></label>
+            <label
+              ><span>Kapitel, hvis kendt</span
+              ><input name="chapter" maxlength="50"
+            /></label>
+            <!-- Feltet til billedupload er fjernet med vilje: serveren
+                 gemmer ikke filer (se kommentaren ved /api/submissions), så
+                 en upload ville se ud til at lykkes uden at nå frem. Kommer
+                 der rigtig fillagring, kan feltet sættes ind igen — og så
+                 skal privatlivspolitikken opdateres samtidig. -->
+            <label class="full"
+              ><span>Link til klip eller billede</span
+              ><input
+                name="media_link"
+                type="url"
+                maxlength="300"
+                inputmode="url"
+                placeholder="https://clips.twitch.tv/…"
+            /></label>
+          </div>
+          <label class="check-label"
+            ><input name="anonymous" type="checkbox" /><span
+              >Indsend anonymt</span
+            ></label
+          >
+          <label class="check-label"
+            ><input name="credit_consent" type="checkbox" /><span
+              >Jeg giver tilladelse til kreditering og brug i RDR2-Thons Journal
+              og sociale materiale.</span
+            ></label
+          >
+          <label class="check-label"
+            ><input name="rules" type="checkbox" required /><span
+              >Jeg accepterer
+              <a href="./regler.html" target="_blank" rel="noreferrer"
+                >community-reglerne ↗</a
+              >
+              og bekræfter, at indholdet er mit eller må deles. *</span
+            ></label
+          >
+          <div class="submission-actions">
+            <button class="button" type="submit">Send til produktionen</button>
+            <span id="submission-status" role="status"></span>
+          </div>
+          <p class="form-legal">
+            Vi gemmer det, du skriver her. Se
+            <a href="./privatliv.html" target="_blank" rel="noreferrer"
+              >privatlivspolitikken ↗</a
+            >.
+          </p>
+        </form>
+        <div class="submission-success" data-submission-success hidden>
+          <p class="kicker">Modtaget</p>
+          <h2 tabindex="-1">Tak. Vi læser alt.</h2>
+          <p>
+            Produktionen kigger alle bidrag igennem. De bedste kommer i
+            Journalen inden for et døgn. Bliver dit ikke valgt, er det ikke en
+            dom over dig — vi har bare begrænset plads og en meget lang uge.
+          </p>
+          <button class="button" type="button" data-dialog-close>Luk</button>
+        </div>
+      </dialog>
+
+      <!-- ================================================= MILEPÆLE === -->
+      <section
+        class="milestones section"
+        id="milestones"
+        aria-labelledby="milestones-title"
+      >
+        <div class="section-heading scroll-reveal">
+          <p class="kicker">Undervejs</p>
+          <h2 id="milestones-title">Væggen der <em>fylder sig selv</em></h2>
+          <p class="lede">
+            Hver gang noget sker for første gang, hænger det her. Ingen skal
+            huske at skrive det ind — det kommer af sig selv fra lejrstatus.
+          </p>
+        </div>
+        <ol class="milestone-wall" data-milestones></ol>
+        <p class="milestone-foot" data-milestone-foot></p>
+      </section>
+
+      <section class="clips-section" id="clips" aria-labelledby="clips-title">
+        <div class="clips-heading">
+          <p class="kicker light">Fremkaldes undervejs</p>
+          <h2 id="clips-title">Fotografier<br /><em>fra rejsen.</em></h2>
+        </div>
+        <div class="clip-wall" data-clip-wall>
+          <article class="clip-photo">
+            <div class="photo-placeholder" aria-hidden="true">01</div>
+            <b>Endnu ikke fremkaldt</b
+            ><small>De første klip kommer 10. august</small>
+          </article>
+          <article class="clip-photo">
+            <div class="photo-placeholder" aria-hidden="true">02</div>
+            <b>Endnu ikke fremkaldt</b
+            ><small>Lejrens favorit vælges under streamen</small>
+          </article>
+          <article class="clip-photo">
+            <div class="photo-placeholder" aria-hidden="true">03</div>
+            <b>Endnu ikke fremkaldt</b
+            ><small>Seernes klip — send via formularen ovenfor</small>
+          </article>
+        </div>
+        <a
+          class="button cream"
+          href="https://twitch.tv/marcelo/clips"
+          target="_blank"
+          rel="noreferrer"
+          >Se klip på Twitch ↗</a
+        >
+      </section>
+
+      <section class="faq-section section" id="faq" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Lejrjournalen</p>
+            <h2 id="faq-title">Spørgsmål<br /><em>&amp; svar.</em></h2>
+          </div>
+          <label class="faq-search"
+            ><span>Søg i FAQ</span
+            ><input
+              id="faq-search"
+              type="search"
+              placeholder="Skriv et nøgleord…"
+              autocomplete="off" /><small data-faq-count role="status"></small
+          ></label>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>Hvad er RDR2-Thon?</summary>
+            <p>
+              Et gaming-maraton, hvor Marcel spiller Red Dead Redemption II fra
+              begyndelsen til gennemført historie inklusive epilogen i én
+              sammenhængende stream.
+            </p>
+          </details>
+          <details>
+            <summary>Hvem er Marcel?</summary>
+            <p>
+              Marcel er streameren. Kanalen hedder Marcelo — det er samme
+              person. Du finder ham på twitch.tv/marcelo.
+            </p>
+          </details>
+          <details>
+            <summary>Er det en subathon?</summary>
+            <p>
+              Nej. Abonnementer, donationer og gaveabonnementer tilføjer ikke
+              ekstra tid. Uret kan ikke købes længere. Streamen slutter, når
+              historien er spillet færdig.
+            </p>
+          </details>
+          <details>
+            <summary>Hvorfor så donere?</summary>
+            <p>
+              Fordi pengene går videre, ikke fordi de køber tid. Er der en
+              indsamling i gang, står målet på forsiden.
+            </p>
+          </details>
+          <details>
+            <summary>Hvornår og hvor begynder det?</summary>
+            <p>
+              Mandag den 10. august 2026 kl. 14.00 dansk tid på
+              twitch.tv/marcelo.
+            </p>
+          </details>
+          <details>
+            <summary>Hvor længe varer eventet?</summary>
+            <p>
+              Vi regner med cirka syv dage. Det er et estimat — den faktiske
+              varighed afhænger af gameplay, pauser, søvn og eventuelle tekniske
+              problemer.
+            </p>
+          </details>
+          <details>
+            <summary>Hvad tæller som gennemført?</summary>
+            <p>
+              Uret stopper, når rulleteksterne ruller efter epilogens sidste
+              mission, “American Venom”. Sidemissioner, samleobjekter og 100 %
+              completion er ikke påkrævet.
+            </p>
+          </details>
+          <details>
+            <summary>Stopper uret under pauser?</summary>
+            <p>
+              Nej. Det officielle elapsed-time-ur fortsætter under pauser,
+              måltider og søvnperioder.
+            </p>
+          </details>
+          <details>
+            <summary>Er streamen live, mens Marcel sover?</summary>
+            <p>
+              Ja. Streamen kører døgnet rundt. Siden skifter til natlejr med
+              bål, så du kan se hvor mange andre der er vågne, og hvornår han
+              ventes op igen.
+            </p>
+          </details>
+          <details>
+            <summary>Hvad er en dusør?</summary>
+            <p>
+              En udfordring fra jer. I foreslår, produktionen godkender, og så
+              er den bindende. De aktive dusører står på opslagstavlen.
+            </p>
+          </details>
+          <details>
+            <summary>Hvad er radio-tilstand?</summary>
+            <p>
+              Tryk på “Radio” i menuen, så bliver siden til en gammel radio, du
+              kan lade stå og køre i baggrunden. Tryk Escape eller “Sluk
+              radioen” for at komme tilbage.
+            </p>
+          </details>
+          <details>
+            <summary>Må Marcel spille sideindhold?</summary>
+            <p>
+              Ja. Frivillige sidemissioner må gerne spilles, men er ikke
+              nødvendige for at afslutte eventet.
+            </p>
+          </details>
+          <details>
+            <summary>Bruger Marcel mods?</summary>
+            <p>
+              Nej. Eventet spilles i en normal, umodificeret version af Red Dead
+              Redemption II.
+            </p>
+          </details>
+          <details>
+            <summary>Kommer streamen på YouTube?</summary>
+            <p>
+              Ja. Den fulde VOD og redigerede highlights planlægges til YouTube.
+              Kortere klip udgives på TikTok og muligvis som YouTube Shorts.
+            </p>
+          </details>
+          <details>
+            <summary>Er der spoilers på siden?</summary>
+            <p>
+              Slå <b>Spoilerfri</b> til i menuen, så skjuler vi alt fra kapitel
+              3 og frem — stednavne, programtitler og journalsider. Du kan altid
+              trykke på en enkelt ting for at se den. Streamen og chatten kan
+              naturligvis indeholde spoilers.
+            </p>
+          </details>
+          <details>
+            <summary>Hvordan sender jeg et klip ind?</summary>
+            <p>
+              Brug “Indsend et øjeblik” i Journalen. Alt bliver læst af et
+              menneske, før det udgives. Se
+              <a href="./regler.html">community-reglerne</a>.
+            </p>
+          </details>
+          <details>
+            <summary>Er eventet officielt?</summary>
+            <p>
+              Nej. Det er en uafhængig creatorproduktion og er ikke officielt
+              sponsoreret, godkendt eller arrangeret af Rockstar Games eller
+              Take-Two Interactive.
+            </p>
+          </details>
+        </div>
+        <p class="faq-empty" data-faq-empty hidden>
+          Ingen svar på “<b data-faq-query></b>”. Prøv “spoiler”, “varighed”
+          eller “YouTube” — eller spørg i chatten.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#top"
+        ><span class="brand-mark" aria-hidden="true">R2</span
+        ><span class="brand-title"><b>RDR II</b><small>THON</small></span></a
+      >
+      <p>
+        En uafhængig fan- og creatorproduktion. Red Dead Redemption II er et
+        varemærke tilhørende Rockstar Games. Eventet er ikke officielt
+        associeret med, godkendt af eller sponsoreret af Rockstar Games eller
+        Take-Two Interactive.
+      </p>
+      <div>
+        <a href="https://twitch.tv/marcelo" target="_blank" rel="noreferrer"
+          >Twitch ↗</a
+        >
+        <a data-discord href="#" target="_blank" rel="noreferrer">Discord ↗</a>
+        <a href="./regler.html">Regler</a>
+        <a href="./privatliv.html">Privatliv</a>
+      </div>
+    </footer>
+
+    <!-- ============================================= KAPITEL-CEREMONI === -->
+    <div class="ceremony" id="ceremony" hidden aria-hidden="true">
+      <div class="ceremony-inner">
+        <span data-ceremony-num>KAPITEL</span>
+        <b data-ceremony-name></b>
+        <i aria-hidden="true">✦</i>
+      </div>
+    </div>
+
+    <!-- ============================================== FØRSTEGANGSSEER === -->
+    <div
+      class="welcome-bar"
+      id="welcome"
+      role="region"
+      aria-label="Spoilerindstilling"
+      hidden
+    >
+      <div class="welcome-copy">
+        <b>Vi har skjult historien for dig.</b>
+        <span
+          >Alt fra kapitel 3 og frem er sløret, indtil du siger andet. Har du
+          spillet Red Dead Redemption II før?</span
+        >
+      </div>
+      <div class="welcome-actions">
+        <button class="button button-small" type="button" data-played="ja">
+          Ja — vis det hele
+        </button>
+        <button
+          class="button button-small cream"
+          type="button"
+          data-played="nej"
+        >
+          Nej — behold sløringen
+        </button>
+      </div>
+      <button
+        class="welcome-close"
+        type="button"
+        data-played="nej"
+        aria-label="Luk"
+      >
+        ×
+      </button>
+    </div>
+
+    <!-- ========================================================= RADIO === -->
+    <div class="radio" id="radio" hidden>
+      <div class="radio-room" aria-hidden="true"></div>
+
+      <div class="radio-set" role="group" aria-label="Radio">
+        <span class="radio-handle" aria-hidden="true"></span>
+
+        <div class="radio-face">
+          <div class="radio-top">
+            <span class="radio-brand">MARCELO<b>RADIO</b></span>
+            <span class="radio-status" data-radio-status>SENDING</span>
+          </div>
+
+          <!-- Oplyst skala med nål -->
+          <div class="radio-dial">
+            <span class="dial-glass" aria-hidden="true"></span>
+            <div class="dial-scale" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i> <i></i
+              ><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="dial-numbers" aria-hidden="true">
+              <span>54</span><span>72</span><span>90</span><span>110</span
+              ><span>140</span>
+            </div>
+            <span class="dial-needle" aria-hidden="true"></span>
+            <span class="dial-band" aria-hidden="true"
+              >RDR · 1899 kHz · KORTBØLGE</span
+            >
+          </div>
+
+          <div class="radio-mid">
+            <!-- Højttaler med vævet dug. Streamen sidder bag gitteret. -->
+            <div class="radio-speaker" data-radio-dock>
+              <span class="speaker-ring" aria-hidden="true"></span>
+              <div class="radio-idle" data-radio-idle>
+                <b>Radioen er tavs</b>
+                <p>Tænd den, så kører lyden videre her.</p>
+                <button
+                  class="button button-small"
+                  type="button"
+                  data-embed-accept
+                >
+                  Tænd radioen
+                </button>
+              </div>
+              <div class="speaker-cloth" aria-hidden="true"></div>
+            </div>
+
+            <div class="radio-side">
+              <!-- Udslagsmåler -->
+              <div class="vu" aria-hidden="true">
+                <span class="vu-face"><i class="vu-needle"></i></span>
+                <span class="vu-label">SIGNAL</span>
+              </div>
+              <div class="radio-knobs" aria-hidden="true">
+                <span class="knob knob-a"><i></i></span>
+                <span class="knob knob-b"><i></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="radio-readout">
+            <span class="radio-label">SPILLER NU</span>
+            <b data-radio-chapter>—</b>
+            <em data-radio-quote></em>
+          </div>
+        </div>
+
+        <span class="radio-feet" aria-hidden="true"><i></i><i></i></span>
+      </div>
+
+      <div class="radio-actions">
+        <button class="button" id="radio-close" type="button">
+          Sluk radioen
+        </button>
+        <small>Eller tryk Escape</small>
+      </div>
+    </div>
+
+    <!-- MIDLERTIDIGT DEMOPANEL — slet denne linje og pitch.js, naar siden gaar
+         i luften. Den skal staa foerst, fordi den lapper fetch: ellers er
+         sidens foerste hentning af data og nattevagt allerede i luften, naar
+         panelet naar at gribe ind. -->
+    <script src="./pitch.js" defer></script>
+    <script src="./script.js" defer></script>
+    <script src="./features.js" defer></script>
+    <!-- Kun aktiv under 760 px: folder lange lister og laegger bundbjaelken. -->
+    <script src="./mobile.js" defer></script>
+  </body>
+</html>

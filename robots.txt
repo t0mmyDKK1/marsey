@@ -1,0 +1,10 @@
+# RDR2-Thon og Marcel — begge på marsey.dk
+
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /admin.html
+Disallow: /overlay.html
+Disallow: /data/
+
+Sitemap: https://marsey.dk/sitemap.xml

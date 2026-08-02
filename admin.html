@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#16120f" />
+    <link rel="icon" href="./assets/icon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="./assets/icon-180.png" />
+    <link rel="stylesheet" href="./admin.css" />
+    <title>Lejrkontoret — RDR2-Thon</title>
+  </head>
+  <body>
+    <!-- ============================================================== LOGIN === -->
+    <section class="login" id="login" hidden>
+      <form id="login-form">
+        <h1>Lejrkontoret</h1>
+        <p>Herfra styrer du hele siden. Log ind for at komme i gang.</p>
+        <label for="password">Adgangskode</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+        <button class="primary big" type="submit">Log ind</button>
+        <p class="error" id="login-error" role="alert"></p>
+        <p class="login-hint">
+          Har du glemt koden, står den i det vindue hvor serveren blev startet —
+          ellers kan den nulstilles ved at slette filen
+          <code>data/auth.json</code>.
+        </p>
+      </form>
+    </section>
+
+    <!-- ============================================================== PANEL === -->
+    <div class="panel" id="panel" hidden>
+      <!-- ---------------------------------------------------------- toplinje -->
+      <header class="bar">
+        <b class="bar-brand">Lejrkontoret</b>
+
+        <span
+          class="pill"
+          id="live-pill"
+          title="Sådan ser siden ud for de besøgende lige nu"
+        >
+          <i></i><span id="live-text">Henter…</span>
+        </span>
+
+        <span
+          class="save-state"
+          id="save-state"
+          role="status"
+          aria-live="polite"
+          >Klar</span
+        >
+
+        <div class="bar-actions">
+          <button
+            class="ghost"
+            id="undo"
+            type="button"
+            title="Fortryd den seneste ændring"
+          >
+            ↺ Fortryd
+          </button>
+          <button
+            class="ghost"
+            id="preview-toggle"
+            type="button"
+            aria-pressed="false"
+          >
+            Vis siden
+          </button>
+          <button
+            class="ghost"
+            id="help-toggle"
+            type="button"
+            aria-pressed="false"
+          >
+            ? Hjælp
+          </button>
+          <button class="ghost" id="logout" type="button">Log ud</button>
+        </div>
+      </header>
+
+      <!-- ------------------------------------------------- hurtige handlinger -->
+      <div class="quick" id="quick">
+        <button class="quick-phase" id="quick-sleep" type="button"></button>
+        <button type="button" id="quick-death">✝ Nyt dødsfald</button>
+        <button type="button" id="quick-quote">❝ Nyt citat</button>
+        <button type="button" data-goto="seerne">
+          📥 Indbakke <span class="badge" id="queue-badge">0</span>
+        </button>
+        <label class="quick-search">
+          <span class="visually-hidden">Søg efter noget at gøre</span>
+          <input
+            id="finder"
+            type="search"
+            placeholder="Hvad vil du gøre? Skriv fx “gravsten”"
+            autocomplete="off"
+          />
+          <div class="finder-results" id="finder-results" hidden></div>
+        </label>
+      </div>
+
+      <!-- ------------------------------------------------------------- hjælp -->
+      <aside class="help" id="help" hidden>
+        <h2>Sådan bruger du Lejrkontoret</h2>
+        <ol>
+          <li>
+            <b>Alt gemmes af sig selv.</b> Skriv noget, vent et øjeblik, så står
+            der “Gemt” foroven. Du skal aldrig huske at trykke gem.
+          </li>
+          <li>
+            <b>Kom galt af sted?</b> Tryk <b>↺ Fortryd</b> foroven. Den
+            fortryder den seneste ændring — også hvis du har lukket vinduet
+            imellem.
+          </li>
+          <li>
+            <b>Fanen “Nu”</b> er den du bruger mest. Der står tilstanden,
+            kapitlet og tællerne.
+          </li>
+          <li>
+            <b>Tilstanden</b> er de fire store knapper. De styrer, hvad de
+            besøgende ser. Vælg <b>Marcel sover</b>, når han går i seng — så
+            tændes bålet på siden.
+          </li>
+          <li>
+            <b>Indbakken</b> er ting, seerne har sendt ind. Intet vises på
+            siden, før du trykker Godkend. Husk at siden kan blive vist på
+            stream.
+          </li>
+          <li>
+            <b>Tryk “Vis siden”</b> foroven for at se, hvordan det ser ud for de
+            besøgende, mens du arbejder.
+          </li>
+        </ol>
+        <p class="help-close">
+          <button class="ghost" type="button" data-close-help>
+            Luk hjælpen
+          </button>
+        </p>
+      </aside>
+
+      <div class="workspace" id="workspace">
+        <div class="main">
+          <!-- --------------------------------------------------------- faner -->
+          <nav class="tabs" id="tabs" role="tablist" aria-label="Områder">
+            <button role="tab" data-tab="nu" class="active">Nu</button>
+            <button role="tab" data-tab="skriv">Skriv &amp; udgiv</button>
+            <button role="tab" data-tab="seerne">
+              Fra seerne <span class="badge" id="queue-badge-2">0</span>
+            </button>
+            <button role="tab" data-tab="rejsen">Rejsen</button>
+            <button role="tab" data-tab="penge">Penge &amp; gæster</button>
+            <button role="tab" data-tab="opsaetning">Opsætning</button>
+          </nav>
+
+          <!-- ========================================================== NU === -->
+          <section class="tab active" data-panel="nu">
+            <div class="card wide" id="sec-tilstand">
+              <h2>Hvad sker der lige nu?</h2>
+              <p class="hint">
+                De fire knapper styrer hele forsiden. Vælg den der passer — det
+                slår igennem med det samme.
+              </p>
+              <div class="phases" id="phases">
+                <button data-phase="pre">
+                  <b>Før start</b><span>Nedtælling til vi rider ud</span>
+                </button>
+                <button data-phase="live">
+                  <b>Vi spiller</b><span>Uret tæller op</span>
+                </button>
+                <button data-phase="sleep">
+                  <b>Marcel sover</b><span>Bålet tændes på siden</span>
+                </button>
+                <button data-phase="ended">
+                  <b>Slut</b><span>Uret fryser for altid</span>
+                </button>
+              </div>
+              <div class="row inset" id="sleep-row" hidden>
+                <label
+                  >Hvornår ventes han op igen?
+                  <input
+                    type="datetime-local"
+                    data-bind="sleep.wakesAt"
+                    data-type="datetime"
+                  />
+                </label>
+                <p class="hint">
+                  Står på bålet som “Marcel forventes vågen ca. …”. Lad det stå
+                  tomt, hvis I ikke ved det.
+                </p>
+              </div>
+              <div class="row inset" id="ended-row" hidden>
+                <label
+                  >Hvornår stoppede uret?
+                  <input
+                    type="datetime-local"
+                    data-bind="endedAt"
+                    data-type="datetime"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="card" id="sec-rutine">
+              <h2>Dagens rutine</h2>
+              <p class="hint">
+                En huskeliste til hver dag under eventet. Den nulstiller sig
+                selv ved midnat.
+              </p>
+              <ul class="routine" id="routine"></ul>
+            </div>
+
+            <div class="card" id="sec-historien">
+              <h2>Historien</h2>
+              <label
+                >Hvilket kapitel er I i?
+                <input
+                  data-bind="story.chapterName"
+                  maxlength="60"
+                  placeholder="fx Clemens Point"
+                />
+              </label>
+              <label
+                >Kapitelnummer
+                <input
+                  type="number"
+                  min="0"
+                  max="8"
+                  data-bind="story.chapterNum"
+                  data-type="number"
+                />
+              </label>
+              <label
+                >Hvilken mission er i gang?
+                <input
+                  data-bind="story.mission"
+                  maxlength="80"
+                  placeholder="Lad stå tomt hvis ingen"
+                />
+              </label>
+              <label
+                >Hvor langt er I? <output id="progress-out">0%</output>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  data-bind="story.progressPct"
+                  data-type="number"
+                  id="progress"
+                />
+              </label>
+              <label class="check danger-check">
+                <input
+                  type="checkbox"
+                  data-bind="story.spoilerSafe"
+                  data-type="bool"
+                />
+                <span
+                  >Det er trygt at vise missionsnavnet til alle
+                  <em
+                    >Fjern fluebenet fra kapitel 3 — så skjules det for dem der
+                    har valgt at gå spoilerfrit.</em
+                  ></span
+                >
+              </label>
+              <label
+                >Hvor ligger lejren?
+                <input data-bind="camp.name" maxlength="60" />
+              </label>
+              <label
+                >Til nye seere: hvad sker der, uden at afsløre historien?
+                <textarea
+                  data-bind="story.plainLanguage"
+                  rows="3"
+                  maxlength="300"
+                  placeholder="fx: Banden er på flugt og leder efter et sted at gemme sig."
+                ></textarea>
+                <small class="under"
+                  >Vises kun for dem der har sagt, at de ikke har spillet
+                  spillet.</small
+                >
+              </label>
+            </div>
+
+            <div class="card" id="sec-taellere">
+              <h2>Tællere</h2>
+              <p class="hint">
+                Ét tryk er nok. Tallene står i lejrstatus og i OBS-overlayet.
+              </p>
+              <div class="steppers" id="steppers">
+                <div data-counter="deaths">
+                  <span>Dødsfald</span
+                  ><button data-step="-1" aria-label="Færre dødsfald">−</button
+                  ><b>0</b
+                  ><button data-step="1" aria-label="Flere dødsfald">+</button>
+                </div>
+                <div data-counter="fastTravels">
+                  <span>Fast travels</span
+                  ><button data-step="-1" aria-label="Færre fast travels">
+                    −</button
+                  ><b>0</b
+                  ><button data-step="1" aria-label="Flere fast travels">
+                    +
+                  </button>
+                </div>
+                <div data-counter="coffees">
+                  <span>Kopper kaffe</span
+                  ><button data-step="-1" aria-label="Færre kopper kaffe">
+                    −</button
+                  ><b>0</b
+                  ><button data-step="1" aria-label="Flere kopper kaffe">
+                    +
+                  </button>
+                </div>
+                <div data-counter="hoursSlept">
+                  <span>Timers søvn</span
+                  ><button data-step="-1" aria-label="Færre timers søvn">
+                    −</button
+                  ><b>0</b
+                  ><button data-step="1" aria-label="Flere timers søvn">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="sec-honour">
+              <h2>Honour</h2>
+              <p class="hint">
+                Aflæs den i spillet og skriv den ind. Vi viser aldrig et tal, I
+                ikke har målt.
+              </p>
+              <label
+                >Hvor hæderlig er Arthur?
+                <output id="honour-out">ikke målt</output>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  id="honour-range"
+                />
+              </label>
+              <label
+                >Hvad kalder vi det?
+                <input
+                  data-bind="honour.label"
+                  maxlength="40"
+                  placeholder="fx Hæderlig"
+                />
+              </label>
+              <div class="row">
+                <button class="primary" id="honour-log" type="button">
+                  Gem dagens måling i kurven
+                </button>
+                <button class="ghost" id="honour-clear" type="button">
+                  Vis “ikke målt”
+                </button>
+              </div>
+              <p class="hint" id="honour-count"></p>
+            </div>
+
+            <div class="card" id="sec-hesten">
+              <h2>Hesten</h2>
+              <label
+                >Hvad hedder den?
+                <input
+                  data-bind="horse.name"
+                  maxlength="40"
+                  placeholder="Lad stå tomt indtil den er døbt"
+                />
+              </label>
+              <label
+                >Hvem gav den navnet?
+                <input
+                  data-bind="horse.namedBy"
+                  maxlength="40"
+                  placeholder="fx chatten"
+                />
+              </label>
+              <label
+                >Hvordan har den det?
+                <select data-bind="horse.status">
+                  <option>i live</option>
+                  <option>død</option>
+                  <option>udskiftet</option>
+                </select>
+              </label>
+              <label class="check"
+                ><input
+                  type="checkbox"
+                  data-bind="horse.votingOpen"
+                  data-type="bool"
+                />
+                <span>Lad seerne stemme om navnet</span></label
+              >
+              <label
+                >Navneforslag — ét på hver linje
+                <textarea
+                  id="horse-options"
+                  rows="4"
+                  placeholder="Bimmer&#10;Sennep&#10;Hr. Hansen"
+                ></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- ================================================ SKRIV & UDGIV === -->
+          <section class="tab" data-panel="skriv">
+            <div class="card wide" id="sec-avisen">
+              <h2>Morgenavisen</h2>
+              <p class="hint">
+                Udgives typisk om morgenen, når Marcel vågner. Du udfylder
+                felterne — siden sætter avisen op selv.
+              </p>
+              <label
+                >Hovedoverskrift
+                <input
+                  id="g-headline"
+                  maxlength="90"
+                  placeholder="SAINT DENIS SLUGTE BANDEN HEL"
+              /></label>
+              <label
+                >Underrubrik
+                <input
+                  id="g-lede"
+                  maxlength="200"
+                  placeholder="Nattens begivenheder i én sætning."
+              /></label>
+              <label
+                >Talboks
+                <input
+                  id="g-stats"
+                  maxlength="140"
+                  placeholder="19 timer spillet · 4 dødsfald · 0 fast travels"
+              /></label>
+              <div class="row">
+                <label
+                  >Nattens citat
+                  <input
+                    id="g-quote"
+                    maxlength="180"
+                    placeholder="Jeg har det fint. Jeg har det helt fint."
+                /></label>
+                <label class="narrow"
+                  >Sagt kl.
+                  <input id="g-quotetime" maxlength="20" placeholder="04.12"
+                /></label>
+              </div>
+              <label
+                >Nattens klip
+                <input
+                  id="g-clip"
+                  type="url"
+                  placeholder="https://clips.twitch.tv/…"
+                />
+                <small class="under"
+                  >Et Twitch-clip. Lad stå tomt hvis I ikke har et.</small
+                ></label
+              >
+              <label
+                >Lille annonce nederst
+                <input
+                  id="g-ad"
+                  maxlength="120"
+                  placeholder="SÆLGES: Én (1) hest. Kun redet om natten."
+              /></label>
+              <label class="check"
+                ><input type="checkbox" id="g-spoiler" /><span
+                  >Overskriften afslører historien — skjul den for
+                  spoilerfri</span
+                ></label
+              >
+              <button class="primary big" id="g-add" type="button">
+                Udgiv avisen
+              </button>
+              <div class="list" id="gazette-list"></div>
+            </div>
+
+            <div class="card" id="sec-citater">
+              <h2>Citater</h2>
+              <div class="row">
+                <label
+                  >Hvad sagde han? <input id="quote-text" maxlength="180"
+                /></label>
+                <label class="narrow"
+                  >Kl.
+                  <input id="quote-time" maxlength="20" placeholder="03.41"
+                /></label>
+              </div>
+              <button class="primary" id="quote-add" type="button">
+                Tilføj citat
+              </button>
+              <p class="hint">
+                Sæt ét som dagens citat — så står det stort på forsiden og i
+                radioen i et døgn.
+              </p>
+              <div class="list" id="quotes-list"></div>
+            </div>
+
+            <div class="card" id="sec-depeche">
+              <h2>Kort nyhed</h2>
+              <p class="hint">
+                En enkelt linje til “Seneste depecher” på forsiden.
+              </p>
+              <label>Overskrift <input id="d-title" maxlength="80" /></label>
+              <label
+                >Tekst
+                <textarea id="d-text" rows="2" maxlength="240"></textarea>
+              </label>
+              <label class="check"
+                ><input type="checkbox" id="d-spoiler" /><span
+                  >Afslører historien</span
+                ></label
+              >
+              <button class="primary" id="d-add" type="button">
+                Udgiv nyheden
+              </button>
+            </div>
+
+            <div class="card wide" id="sec-journal">
+              <h2>Ny journalside</h2>
+              <p class="hint">
+                Den lange version — en hel opslået side i bogen.
+              </p>
+              <div class="row">
+                <label>Overskrift <input id="j-title" maxlength="90" /></label>
+                <label class="narrow"
+                  >Slags
+                  <input
+                    id="j-category"
+                    maxlength="40"
+                    placeholder="PRODUKTIONSNOTE"
+                /></label>
+              </div>
+              <label
+                >Brødtekst
+                <textarea id="j-body" rows="4" maxlength="800"></textarea>
+              </label>
+              <div class="row">
+                <label>Citat <input id="j-quote" maxlength="180" /></label>
+                <label
+                  >Håndskrevet note i margen <input id="j-note" maxlength="120"
+                /></label>
+              </div>
+              <label
+                >Produktionens note
+                <textarea id="j-production" rows="2" maxlength="400"></textarea>
+              </label>
+              <div class="row">
+                <label>Kapitel <input id="j-chapter" maxlength="40" /></label>
+                <label
+                  >Krediteres
+                  <input
+                    id="j-credit"
+                    maxlength="60"
+                    placeholder="RDR2-Thon produktionen"
+                /></label>
+                <label
+                  >Mærkater
+                  <input id="j-tags" maxlength="120" placeholder="NAT, KLIP"
+                /></label>
+              </div>
+              <label class="check"
+                ><input type="checkbox" id="j-spoiler" /><span
+                  >Læg siden bag et spoilerdæksel</span
+                ></label
+              >
+              <button class="primary big" id="j-add" type="button">
+                Udgiv journalsiden
+              </button>
+              <label class="list-search"
+                >Søg i udgivne sider
+                <input
+                  id="journal-search"
+                  type="search"
+                  placeholder="Skriv et ord…"
+                  autocomplete="off"
+                />
+              </label>
+              <div class="list" id="journal-list"></div>
+            </div>
+          </section>
+
+          <!-- ==================================================== FRA SEERNE === -->
+          <section class="tab" data-panel="seerne">
+            <div class="card wide" id="sec-indbakke">
+              <h2>Indbakke</h2>
+              <p class="warn-note">
+                <b>Intet herfra vises på siden, før du trykker Godkend.</b> Husk
+                at siden kan blive vist på stream.
+              </p>
+              <div class="filters">
+                <button class="chip active" data-filter="afventer">
+                  Venter på dig
+                </button>
+                <button class="chip" data-filter="godkendt">Godkendte</button>
+                <button class="chip" data-filter="afvist">Afviste</button>
+                <button class="chip" data-filter="alle">Alle</button>
+              </div>
+              <div class="list" id="queue"></div>
+            </div>
+
+            <div class="card" id="sec-dusorer">
+              <h2>Dusører</h2>
+              <p class="hint">
+                Udfordringer til Marcel. Hold jer til tre aktive ad gangen —
+                ellers når I aldrig i mål.
+              </p>
+              <label
+                >Udfordringen
+                <input
+                  id="bounty-text"
+                  maxlength="140"
+                  placeholder="Rid fra Valentine til Rhodes uden at åbne kortet"
+              /></label>
+              <label
+                >Foreslået af
+                <input
+                  id="bounty-by"
+                  maxlength="40"
+                  placeholder="Navnet på seeren"
+              /></label>
+              <button class="primary" id="bounty-add" type="button">
+                Sæt den på opslagstavlen
+              </button>
+              <div class="list" id="bounties-list"></div>
+            </div>
+
+            <div class="card" id="sec-domme">
+              <h2>Dagens dom</h2>
+              <p class="hint">
+                Ét spørgsmål ad gangen. Afgør det på stream dagen efter.
+              </p>
+              <label
+                >Spørgsmål <input data-bind="poll.question" maxlength="140"
+              /></label>
+              <label
+                >Svarmuligheder — én på hver linje
+                <textarea id="poll-options" rows="4"></textarea>
+              </label>
+              <div class="row">
+                <button class="primary" id="poll-open" type="button">
+                  Åbn afstemningen
+                </button>
+                <button class="ghost" id="poll-close" type="button">
+                  Luk den
+                </button>
+              </div>
+              <label
+                >Resultattekst, når den er afgjort
+                <input
+                  data-bind="poll.resolved"
+                  maxlength="200"
+                  placeholder="I går gættede 61 % på en fail. I fik ret."
+                />
+              </label>
+              <div class="tally" id="poll-tally"></div>
+            </div>
+
+            <div class="card" id="sec-forudsigelser">
+              <h2>Forudsigelser</h2>
+              <p class="hint">
+                Åbnes typisk før et nyt kapitel. Skriv det rigtige svar ind
+                bagefter — så får seerne point.
+              </p>
+              <label
+                >Spørgsmål
+                <input
+                  id="pred-q"
+                  maxlength="140"
+                  placeholder="Hvor mange gange dør Marcel i kapitel 3?"
+              /></label>
+              <label
+                >Svarmuligheder — én på hver linje
+                <textarea id="pred-options" rows="4"></textarea>
+              </label>
+              <button class="primary" id="pred-add" type="button">
+                Åbn forudsigelsen
+              </button>
+              <div class="list" id="pred-list"></div>
+            </div>
+          </section>
+
+          <!-- ======================================================= REJSEN === -->
+          <section class="tab" data-panel="rejsen">
+            <div class="card wide" id="sec-ruten">
+              <h2>Hvor er I nået til?</h2>
+              <p class="hint">
+                Tryk på en prik på kortet — eller på knappen i listen. Det er
+                det samme flag. Kortet her er præcis det, publikum ser på
+                forsiden, bortset fra at du altid kan se alle ankre.
+              </p>
+              <div class="admin-map" id="admin-map">
+                <img
+                  class="admin-map-image"
+                  src="./assets/rdr2-world-map-900.webp"
+                  width="900"
+                  height="505"
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                />
+                <!-- Samme viewBox og preserveAspectRatio som forsiden. Ændres
+                     det ene sted, skal det ændres begge steder, ellers sidder
+                     nålene forskelligt de to steder. -->
+                <svg
+                  class="admin-map-art"
+                  viewBox="0 0 1000 560"
+                  preserveAspectRatio="none"
+                  role="group"
+                  aria-label="Kortet — tryk på et anker for at sætte eller fjerne flaget"
+                >
+                  <path class="admin-map-trail" data-admin-trail fill="none" />
+                  <g data-admin-pins></g>
+                </svg>
+              </div>
+              <p class="admin-map-readout" data-admin-map-readout role="status">
+                Ingen flag sat endnu. Det første sættes, når banden rider ud.
+              </p>
+              <div class="list" id="route-list"></div>
+            </div>
+
+            <div class="card wide" id="sec-tidslinje">
+              <h2>Hvad er der sket?</h2>
+              <p class="hint">
+                Tidslinjen på forsiden er fuld af gæt, indtil du bekræfter dem.
+                Tryk “Det skete nu”, når noget faktisk sker — så bliver
+                markeringen udfyldt og flytter sig hen til det rigtige
+                tidspunkt. Gæt vises stiplet, så ingen tror det er en aftale med
+                Marcel.
+              </p>
+              <div class="row">
+                <label
+                  >Tilføj en hændelse
+                  <input
+                    id="beat-title"
+                    type="text"
+                    maxlength="70"
+                    placeholder="fx “Streamen var nede i 20 minutter”"
+                /></label>
+                <label
+                  >Type
+                  <select id="beat-type">
+                    <option value="milestone">Milepæl</option>
+                    <option value="story">Historie</option>
+                    <option value="sleep">Søvn</option>
+                  </select></label
+                >
+                <label class="check"
+                  ><input id="beat-spoiler" type="checkbox" /> Indeholder
+                  spoiler</label
+                >
+                <button class="primary" type="button" id="beat-add">
+                  Tilføj som sket nu
+                </button>
+              </div>
+              <div class="list" id="beat-list"></div>
+            </div>
+
+            <div class="card" id="sec-lejre">
+              <h2>Lejrene</h2>
+              <p class="hint">Listen i “Trail Log” på forsiden.</p>
+              <div class="list" id="trail-list"></div>
+            </div>
+
+            <div class="card wide" id="sec-kirkegaard">
+              <h2>Kirkegården</h2>
+              <p class="hint">
+                Hver gang det går galt, rejser vi en sten. Dødstælleren følger
+                automatisk med.
+              </p>
+              <div class="row">
+                <label
+                  >Hvad skete der?
+                  <input
+                    id="grave-cause"
+                    maxlength="60"
+                    placeholder="Faldt ned fra en klippe"
+                /></label>
+                <label
+                  >Bemærkning
+                  <input
+                    id="grave-note"
+                    maxlength="120"
+                    placeholder="Han sagde selv, det var en genvej."
+                /></label>
+              </div>
+              <button class="primary" id="grave-add" type="button">
+                Rejs stenen
+              </button>
+              <div class="list" id="graves-list"></div>
+            </div>
+          </section>
+
+          <!-- ================================================ PENGE & GÆSTER === -->
+          <section class="tab" data-panel="penge">
+            <div class="card" id="sec-penge">
+              <h2>Indsamlingen</h2>
+              <p class="hint">
+                Står på forsiden som “I har doneret … Det har forlænget uret med
+                0 sekunder.”
+              </p>
+              <div class="row">
+                <label
+                  >Indsamlet i alt
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    data-bind="donations.total"
+                    data-type="number"
+                /></label>
+                <label class="narrow"
+                  >Valuta <input data-bind="donations.currency" maxlength="10"
+                /></label>
+              </div>
+              <label
+                >Pengene går til
+                <input
+                  data-bind="donations.charity.name"
+                  maxlength="80"
+                  placeholder="Lad stå tomt, så skjules indsamlingen"
+                />
+              </label>
+              <div class="row">
+                <label
+                  >Mål
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    data-bind="donations.charity.goal"
+                    data-type="number"
+                /></label>
+                <label
+                  >Link til indsamlingen
+                  <input type="url" data-bind="donations.charity.url"
+                /></label>
+              </div>
+            </div>
+
+            <div class="card" id="sec-gaester">
+              <h2>Gæster</h2>
+              <div class="row">
+                <label>Navn <input id="guest-name" maxlength="60" /></label>
+                <label
+                  >Hvornår <input id="guest-at" type="datetime-local"
+                /></label>
+              </div>
+              <label>Note <input id="guest-note" maxlength="120" /></label>
+              <button class="primary" id="guest-add" type="button">
+                Tilføj gæsten
+              </button>
+              <div class="list" id="guests-list"></div>
+            </div>
+          </section>
+
+          <!-- ==================================================== OPSÆTNING === -->
+          <section class="tab" data-panel="opsaetning">
+            <div class="card" id="sec-overlays">
+              <h2>Overlays til OBS</h2>
+              <p class="hint">
+                Tilføj hver af dem som en <b>Browser Source</b> i OBS.
+                Baggrunden er gennemsigtig, og de opdaterer sig selv.
+              </p>
+              <div class="list" id="overlay-links"></div>
+            </div>
+
+            <div class="card" id="sec-kode">
+              <h2>Skift adgangskode</h2>
+              <label
+                >Ny adgangskode
+                <input
+                  id="new-password"
+                  type="password"
+                  autocomplete="new-password"
+                />
+                <small class="under">Mindst 8 tegn.</small></label
+              >
+              <button class="primary" id="change-password" type="button">
+                Skift koden
+              </button>
+              <p class="hint" id="password-status" role="status"></p>
+            </div>
+
+            <div class="card" id="sec-fortryd">
+              <h2>Tidligere versioner</h2>
+              <p class="hint">
+                Hver gang noget gemmes, lægger vi den forrige version til side.
+                Her kan du gå tilbage.
+              </p>
+              <div class="list" id="history-list"></div>
+            </div>
+
+            <div class="card wide" id="sec-avanceret">
+              <h2>For viderekomne</h2>
+              <details>
+                <summary>Rediger alle data direkte</summary>
+                <p class="hint">
+                  Kun hvis du ved hvad du laver. En tastefejl her kan slette
+                  indhold. Brug hellere felterne på de andre faner.
+                </p>
+                <textarea id="raw" rows="14" spellcheck="false"></textarea>
+                <div class="row">
+                  <button class="ghost" id="raw-load" type="button">
+                    Hent det nuværende
+                  </button>
+                  <button class="ghost danger" id="raw-apply" type="button">
+                    Anvend ændringerne
+                  </button>
+                </div>
+                <p class="hint" id="raw-status" role="status"></p>
+              </details>
+            </div>
+          </section>
+        </div>
+
+        <!-- ----------------------------------------------------- forhåndsvisning -->
+        <aside class="preview" id="preview" hidden>
+          <div class="preview-bar">
+            <b>Sådan ser siden ud</b>
+            <button class="ghost" id="preview-reload" type="button">
+              Opdater
+            </button>
+            <button
+              class="ghost"
+              id="preview-close"
+              type="button"
+              aria-label="Luk forhåndsvisning"
+            >
+              ×
+            </button>
+          </div>
+          <iframe
+            id="preview-frame"
+            title="Forhåndsvisning af forsiden"
+            src="about:blank"
+          ></iframe>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------------- små dialoger -->
+    <dialog class="mini" id="death-dialog">
+      <form method="dialog">
+        <h2>Nyt dødsfald</h2>
+        <label
+          >Hvad skete der?
+          <input
+            id="death-cause"
+            maxlength="60"
+            placeholder="Faldt ned fra en klippe"
+            required
+        /></label>
+        <label
+          >Bemærkning
+          <input id="death-note" maxlength="120" placeholder="Valgfrit"
+        /></label>
+        <div class="mini-actions">
+          <button class="primary" value="ok" type="submit">Rejs stenen</button>
+          <button class="ghost" value="cancel" type="button" data-close>
+            Fortryd
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="mini" id="quote-dialog">
+      <form method="dialog">
+        <h2>Nyt citat</h2>
+        <label
+          >Hvad sagde han? <input id="qd-text" maxlength="180" required
+        /></label>
+        <label
+          >Sagt kl. <input id="qd-time" maxlength="20" placeholder="03.41"
+        /></label>
+        <label class="check"
+          ><input type="checkbox" id="qd-tagline" checked /><span
+            >Gør det til dagens citat</span
+          ></label
+        >
+        <div class="mini-actions">
+          <button class="primary" value="ok" type="submit">Tilføj</button>
+          <button class="ghost" value="cancel" type="button" data-close>
+            Fortryd
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="./admin.js" defer></script>
+  </body>
+</html>
