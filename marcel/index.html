@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f0e6" />
+    <meta
+      name="description"
+      content="Marcel, bedre kendt som Marcelo: dansk streamer, entertainer og kreativ samarbejdspartner. Se projekter, klip og muligheder for samarbejde."
+    />
+    <meta
+      property="og:title"
+      content="Marcelo — Streamer, entertainer og kreativ partner"
+    />
+    <meta
+      property="og:description"
+      content="Live underholdning, ambitiøse creator-projekter og samarbejder, der føles som indhold."
+    />
+    <meta property="og:type" content="website" />
+    <!-- Absolutte adresser. Facebook, LinkedIn og Slack henter billedet fra
+         deres egne servere og kan ikke opløse en relativ sti. -->
+    <link rel="canonical" href="https://marsey.dk/marcel/" />
+    <meta property="og:url" content="https://marsey.dk/marcel/" />
+    <meta
+      property="og:image"
+      content="https://marsey.dk/marcel/assets/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Marcelo" />
+    <meta property="og:locale" content="da_DK" />
+    <meta
+      name="twitter:image"
+      content="https://marsey.dk/marcel/assets/og-image.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link
+      rel="preload"
+      href="./assets/redemption.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./style.css?v=2" />
+    <title>Marcelo — Live, projekter &amp; samarbejde</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Gå til indhold</a>
+    <div class="page-progress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="Marcelo — forside">
+        <span>M</span><b>MARCELO</b>
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        Menu
+      </button>
+      <nav id="site-nav" aria-label="Primær navigation">
+        <a href="#about">Om</a>
+        <a href="#projects">Projekter</a>
+        <a href="#clips">Klip</a>
+        <a href="#numbers">Tal</a>
+        <a href="#collabs">Samarbejde</a>
+      </nav>
+      <button class="motion-toggle" type="button" aria-pressed="false">
+        Rolig visning
+      </button>
+      <a class="header-contact" href="#contact">Kontakt</a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="overline"><span></span> Dansk streamer &amp; entertainer</p>
+          <!-- Vises kun når Twitch siger at der streames lige nu. -->
+          <a
+            class="hero-live"
+            href="https://twitch.tv/marcelo"
+            target="_blank"
+            rel="noreferrer"
+            data-hero-live
+            hidden
+          >
+            <i aria-hidden="true"></i>
+            <b>Live nu</b>
+            <span data-hero-live-meta></span>
+            <em aria-hidden="true">Se med ↗</em>
+          </a>
+          <h1 id="hero-title">
+            Det skal<br />være <em>sjovt</em><br />at se med.
+          </h1>
+          <p class="hero-lede">
+            Marcel — bedre kendt som <b>Marcelo</b> — laver live underholdning,
+            store creator-projekter og samarbejder, der føles som indhold. Ikke
+            reklamepauser.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-dark"
+              href="https://twitch.tv/marcelo"
+              target="_blank"
+              rel="noreferrer"
+              >Se live på Twitch <span>↗</span></a
+            >
+            <a class="button button-line" href="#projects"
+              >Se projekter <span>↓</span></a
+            >
+          </div>
+          <ul class="quick-facts" aria-label="Hurtige oplysninger">
+            <li><span>Base</span><b>Danmark</b></li>
+            <li><span>Indhold</span><b>Live · Gaming · IRL</b></li>
+            <li><span>For partners</span><b>Åben for idéer</b></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Udskift .portrait-placeholder med et rigtigt <img> af Marcel -->
+          <div class="portrait-card">
+            <div
+              class="portrait-placeholder"
+              role="img"
+              aria-label="Grafisk pladsholder for portræt af Marcel"
+              data-portrait
+            >
+              <span data-demo-badge>PORTRÆT PÅ VEJ</span>
+              <b>M</b>
+              <small data-demo-badge>content.js → portraet</small>
+            </div>
+            <p><span>ON AIR</span> når idéen er god nok</p>
+          </div>
+          <div class="orbit orbit-one" aria-hidden="true">LIVE</div>
+          <div class="orbit orbit-two" aria-hidden="true">CREATOR</div>
+          <div class="scribble" aria-hidden="true"></div>
+        </div>
+        <a class="scroll-note" href="#intro"><span>SCROLL</span><i></i></a>
+      </section>
+
+      <section class="marquee" aria-label="Marcels indhold">
+        <div>
+          LIVE UNDERHOLDNING <i>✳</i> STORE IDÉER <i>✳</i> COMMUNITY FØRST
+          <i>✳</i> GAMING <i>✳</i> IRL <i>✳</i> LIVE UNDERHOLDNING
+          <i>✳</i> STORE IDÉER <i>✳</i> COMMUNITY FØRST <i>✳</i> GAMING
+          <i>✳</i> IRL <i>✳</i>
+        </div>
+      </section>
+
+      <section class="intro section" id="intro">
+        <p class="section-index">01 / INTRO</p>
+        <div>
+          <p class="intro-small">En kanal er let at starte.</p>
+          <p class="intro-big">
+            Et sted folk <em>kommer tilbage til</em> kræver lidt mere.
+          </p>
+        </div>
+        <p class="intro-aside">
+          Marcelo bygger formater, løbende jokes og events sammen med sit
+          community — med plads til både det planlagte og det, der går helt
+          galt.
+        </p>
+      </section>
+
+      <section class="live-card section" aria-labelledby="live-title">
+        <div class="live-copy">
+          <p class="eyebrow">LIGE NU</p>
+          <div class="live-status">
+            <span></span><b data-live-label>OFFLINE</b>
+          </div>
+          <h2 id="live-title">
+            <span data-live-heading>Næste stream:</span><br /><em
+              data-next-stream
+              >—</em
+            >
+          </h2>
+          <p data-stream-description>
+            Vi fortsætter ugens spil, gennemgår chatten og forsøger
+            sandsynligvis noget, der lød lettere på papiret.
+          </p>
+          <a
+            class="button button-light"
+            href="https://twitch.tv/marcelo"
+            target="_blank"
+            rel="noreferrer"
+            >Følg på Twitch <span>↗</span></a
+          >
+        </div>
+        <div class="live-screen" aria-label="Plads til Twitch preview">
+          <div class="screen-ui">
+            <span>MARCELO / LIVE</span><span>TWITCH</span>
+          </div>
+          <div class="screen-placeholder">
+            <b>STREAM<br />PREVIEW</b>
+            <span
+              >Indlæses først når du beder om det. Både previewet og livechatten
+              kontakter Twitch, som dermed ser din IP-adresse.</span
+            >
+            <button class="twitch-load" type="button" data-twitch-load>
+              Indlæs preview og chat
+            </button>
+          </div>
+          <!-- Fyldes med rigtige beskeder af chat.js. Linjerne herunder
+               staar, indtil der kommer noget, og hvis forbindelsen falder.
+               aria-live er slaaet fra med vilje: en chat der loeber, ville
+               afbryde skaermlaeseren ved hver eneste besked. role=log goer
+               stadig omraadet muligt at opsoege. -->
+          <div
+            class="screen-chat"
+            role="log"
+            aria-label="Chat fra Twitch"
+            aria-live="off"
+          >
+            <i></i>
+            <p><b>chatnavn</b> det kan umuligt gå galt</p>
+            <i></i>
+            <p><b>andenviewer</b> famous last words</p>
+            <i></i>
+            <p><b>community</b> W</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="about" aria-labelledby="about-title">
+        <p class="section-index">02 / OM MARCEL</p>
+        <div class="about-heading">
+          <h2 id="about-title">
+            Et rigtigt menneske.<br /><em>For det meste.</em>
+          </h2>
+          <span class="stamp" aria-hidden="true">NO NPC<br />ENERGY</span>
+        </div>
+        <div class="about-grid">
+          <p class="lead">
+            Marcel er en dansk streamer og entertainer med fokus på den slags
+            liveshows, hvor chatten ikke bare ser på — den er med til at forme
+            øjeblikket.
+          </p>
+          <div>
+            <p>
+              Indholdet bevæger sig mellem gaming, IRL, samtaler og større
+              specialprojekter. Fællesnævneren er nærvær, timing og en
+              forkærlighed for idéer, der måske er en anelse for ambitiøse.
+            </p>
+            <p>
+              For nye seere er døren åben. For gamle seere er de dårlige interne
+              jokes stadig i live. Og for partnere er målet enkelt: at skabe
+              noget, publikum faktisk har lyst til at se.
+            </p>
+          </div>
+        </div>
+        <div class="values">
+          <article>
+            <span>01</span>
+            <h3>Community over reach</h3>
+            <p>Et engageret publikum er mere værd end et stort, passivt tal.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Idé over integration</h3>
+            <p>Brandet skal passe ind i formatet — ikke afbryde det.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Live må føles live</h3>
+            <p>Der skal være plads til spontanitet, fejl og ægte reaktioner.</p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="projects section"
+        id="projects"
+        aria-labelledby="projects-title"
+      >
+        <div class="section-head">
+          <p class="section-index">03 / UDVALGTE PROJEKTER</p>
+          <h2 id="projects-title">
+            Idéer med deres<br />egen <em>verden.</em>
+          </h2>
+          <p>
+            Hovedsiden holder styr på tingene. Projekterne får lov til at gå
+            helt fra forstanden.
+          </p>
+        </div>
+
+        <a
+          class="featured-project"
+          href="../"
+          aria-label="Åbn RDR2-Thon-projektet"
+        >
+          <img
+            src="./assets/rdr2-thon-poster-1400.webp"
+            alt="RDR2-Thon med ryttere i et rødt westernlandskab"
+            width="1400"
+            height="788"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="project-overlay">
+            <p><span>01</span> LIVE EVENT · 2026</p>
+            <h3>RDR2<br />THON</h3>
+            <div>
+              <b>Ét spil. Én stream.<br />Hele historien.</b
+              ><span class="round-arrow">↗</span>
+            </div>
+          </div>
+          <span class="case-label">ÅBN PROJEKTSIDEN</span>
+        </a>
+
+        <div class="project-grid">
+          <a class="project-card project-power" href="./cases/powerwalk.html">
+            <div class="project-art art-walk" aria-hidden="true">
+              <span class="walk-road"></span>
+              <span class="walk-figures"><i></i><i></i><i></i></span>
+              <b data-pw-km>105</b><em>km</em>
+            </div>
+            <p>
+              <span>02</span> SPONSORERET EVENT · <span data-pw-year>2026</span>
+            </p>
+            <h3>Power<br />walk</h3>
+            <small
+              >Tre streamere gik <span data-pw-km2>105</span> km på
+              <span data-pw-hours>72</span> timer — fra Sjællands Odde til
+              POWERs butiksåbning på Fisketorvet.</small
+            >
+            <ul class="project-facts" data-pw-facts></ul>
+            <span class="case-cta">Se hele casen</span>
+            <span class="round-arrow">↗</span>
+          </a>
+          <a class="project-card project-blue" href="#" data-demo-card>
+            <div class="project-art art-counter" aria-hidden="true">
+              <b>24:00</b><i></i>
+            </div>
+            <p><span>03</span> SPECIAL EVENT · DUMMY</p>
+            <h3>24 timer<br />senere</h3>
+            <small>Udskift med udfordring, IRL-event eller kampagnecase.</small>
+            <span class="round-arrow">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="clips section" id="clips" aria-labelledby="clips-title">
+        <div class="section-head row">
+          <div>
+            <p class="section-index">04 / KLIP</p>
+            <h2 id="clips-title">Start<br /><em>her.</em></h2>
+          </div>
+          <p>
+            Tre klip er nok til at forstå energien — resten klarer streamen
+            selv.
+          </p>
+        </div>
+        <div class="clip-grid">
+          <a class="clip clip-one" href="#" data-clip>
+            <div class="clip-visual">
+              <span class="play">PLAY</span><b data-clip-time>—</b><i>01</i>
+            </div>
+            <h3>—</h3>
+            <p>KLIP</p>
+          </a>
+          <a class="clip clip-two" href="#" data-clip>
+            <div class="clip-visual">
+              <span class="play">PLAY</span><b data-clip-time>—</b><i>02</i>
+            </div>
+            <h3>—</h3>
+            <p>KLIP</p>
+          </a>
+          <a class="clip clip-three" href="#" data-clip>
+            <div class="clip-visual">
+              <span class="play">PLAY</span><b data-clip-time>—</b><i>03</i>
+            </div>
+            <h3>—</h3>
+            <p>KLIP</p>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="numbers section"
+        id="numbers"
+        aria-labelledby="numbers-title"
+      >
+        <div class="numbers-intro">
+          <p class="section-index">05 / AUDIENCE</p>
+          <h2 id="numbers-title">Tal med<br /><em>mennesker bag.</em></h2>
+          <p>
+            Tal med periode og datagrundlag på — så en partner kan regne på dem
+            i stedet for at gætte.
+          </p>
+          <span class="demo-badge" data-demo-badge>DEMO DATA</span>
+        </div>
+        <div class="number-grid" data-stat-grid></div>
+        <div class="audience-panel">
+          <div>
+            <p>Aldersfordeling</p>
+            <div class="bars" aria-label="Aldersfordeling" data-bars></div>
+          </div>
+          <div class="platform-list">
+            <p>Platforme</p>
+            <a href="#" data-social="twitch"><b>Twitch</b><span>↗</span></a>
+            <a href="#" data-social="youtube"><b>YouTube</b><span>↗</span></a>
+            <a href="#" data-social="tiktok"><b>TikTok</b><span>↗</span></a>
+            <a href="#" data-social="instagram"
+              ><b>Instagram</b><span>↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="collabs section"
+        id="collabs"
+        aria-labelledby="collabs-title"
+      >
+        <div class="collab-top">
+          <p class="section-index">06 / SAMARBEJDE</p>
+          <h2 id="collabs-title">
+            Et brand må gerne<br />være med i <em>joken.</em>
+          </h2>
+        </div>
+        <div class="collab-grid">
+          <article>
+            <span>FORMAT 01</span>
+            <h3>Live integration</h3>
+            <p>
+              Produktet bliver en naturlig del af streamens format, udfordring
+              eller samtale.
+            </p>
+            <ul>
+              <li>Dedikeret segment</li>
+              <li>Live demo</li>
+              <li>Chataktivering</li>
+            </ul>
+          </article>
+          <article>
+            <span>FORMAT 02</span>
+            <h3>Specialprojekt</h3>
+            <p>
+              Et selvstændigt koncept med sin egen identitet, landingsside og
+              fortælling.
+            </p>
+            <ul>
+              <li>Idéudvikling</li>
+              <li>Eventproduktion</li>
+              <li>Cross-platform assets</li>
+            </ul>
+          </article>
+          <article>
+            <span>FORMAT 03</span>
+            <h3>Ambassadørskab</h3>
+            <p>
+              Et længere samarbejde, hvor troværdighed og gentagelse får lov til
+              at arbejde.
+            </p>
+            <ul>
+              <li>Always-on presence</li>
+              <li>Kategori-eksklusivitet</li>
+              <li>Løbende rapportering</li>
+            </ul>
+          </article>
+        </div>
+        <blockquote>
+          <p>
+            “Marcelos community tog imod kampagnen, som var den deres egen idé.
+            Det er dét, man betaler for.”
+          </p>
+          <footer>
+            <span>PARTNERNAVN</span> / Titel · virksomhed
+            <b data-demo-badge>DEMO CITAT — content.js → citat</b>
+          </footer>
+        </blockquote>
+      </section>
+
+      <section class="media-kit section" aria-labelledby="kit-title">
+        <div>
+          <p class="section-index">MEDIA KIT / 2026</p>
+          <h2 id="kit-title">Skal vi lave<br />noget folk <em>husker?</em></h2>
+        </div>
+        <div>
+          <p>
+            Media kittet samler verificerede tal, målgruppe, tidligere cases,
+            formater, priser og praktiske kontaktoplysninger i én partnerklar
+            PDF.
+          </p>
+          <a class="button button-dark" href="#" data-mediakit
+            >Download media kit <span>↓</span></a
+          >
+          <small data-mediakit-note
+            >Dummy-download — læg PDF'en i assets og skriv stien i
+            content.js.</small
+          >
+        </div>
+      </section>
+
+      <section
+        class="contact section"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="contact-copy">
+          <p class="section-index">07 / KONTAKT</p>
+          <h2 id="contact-title">Fortæl os den<br /><em>gode idé.</em></h2>
+          <p>
+            Samarbejde, gæsteoptræden, presse eller noget helt fjerde. Skriv
+            kort, hvad du forestiller dig — så vender Marcels team tilbage.
+          </p>
+          <a href="#contact" data-mail>kontakt@…</a>
+          <small data-mail-note
+            >DUMMY MAIL — skriv den rigtige i content.js</small
+          >
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="field-row">
+            <label
+              ><span>Navn *</span
+              ><input name="name" autocomplete="name" required
+            /></label>
+            <label
+              ><span>Virksomhed</span
+              ><input name="company" autocomplete="organization"
+            /></label>
+          </div>
+          <label
+            ><span>E-mail *</span
+            ><input name="email" type="email" autocomplete="email" required
+          /></label>
+          <label
+            ><span>Hvad drejer det sig om? *</span>
+            <select name="subject" required>
+              <option value="">Vælg emne</option>
+              <option>Samarbejde</option>
+              <option>Presse</option>
+              <option>Gæsteoptræden</option>
+              <option>Andet</option>
+            </select>
+          </label>
+          <label
+            ><span>Idé eller besked *</span
+            ><textarea
+              name="message"
+              rows="5"
+              required
+              maxlength="1500"
+            ></textarea>
+          </label>
+          <label class="consent"
+            ><input type="checkbox" name="consent" required /><span
+              >Jeg accepterer, at oplysningerne bruges til at besvare min
+              henvendelse. *</span
+            ></label
+          >
+          <div class="form-bottom">
+            <button class="button button-dark" type="submit">
+              Send forespørgsel <span>↗</span>
+            </button>
+            <p id="form-status" role="status"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <a class="logo footer-logo" href="#top"><span>M</span><b>MARCELO</b></a>
+        <p>Streamer. Entertainer.<br />Professionel dårlig indflydelse.</p>
+        <a class="back-top" href="#top">Til toppen ↑</a>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span data-year></span> Marcelo. Alle rettigheder forbeholdes.</p>
+        <nav aria-label="Sociale links">
+          <a href="#" data-social="twitch"><b>Twitch</b><span hidden></span></a>
+          <a href="#" data-social="youtube"
+            ><b>YouTube</b><span hidden></span
+          ></a>
+          <a href="#" data-social="tiktok"><b>TikTok</b><span hidden></span></a>
+          <a href="#" data-social="instagram"
+            ><b>Instagram</b><span hidden></span
+          ></a>
+        </nav>
+        <div>
+          <a href="./privatliv.html">Privatliv</a><a href="#contact">Kontakt</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="demo-toast" id="demo-toast" role="status" hidden>
+      Dummy-link — indsæt den rigtige URL i index.html.
+    </div>
+    <script src="./content.js?v=2" defer></script>
+    <script src="./script.js?v=2" defer></script>
+    <!-- Kun aktiv under 760 px: klipper tekst af og laegger bundbjaelken. -->
+    <script src="./mobile.js?v=1" defer></script>
+    <!-- Rigtig Twitch-chat via anonym IRC, tegnet i sidens eget design. -->
+    <script src="./chat.js?v=1" defer></script>
+  </body>
+</html>

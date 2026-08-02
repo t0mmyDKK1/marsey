@@ -1,0 +1,564 @@
+/* ============================================================================
+   CASE-SIDER
+   ----------------------------------------------------------------------------
+   Samme formsprog som forsiden — men roligere. En case laeses, den scrolles
+   ikke igennem. Derfor: bredere marginer, laengere linjer, mindre pynt.
+   Nederst er der en print-blok, saa "Gem som PDF" giver et dokument man kan
+   sende til et brand.
+   ========================================================================== */
+
+.case-page {
+  background: var(--surface);
+}
+
+/* ------------------------------------------------------------------ header */
+.case-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 74px;
+  padding: 0 clamp(20px, 5vw, 70px);
+  background: rgba(245, 240, 230, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.case-header nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.case-header nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.print-btn {
+  min-height: 44px;
+  padding: 0 18px;
+  cursor: pointer;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+  font:
+    800 12px/1 Arial,
+    sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.print-btn:hover {
+  background: var(--action);
+  border-color: var(--action);
+}
+
+/* -------------------------------------------------------------------- hero */
+.case-hero {
+  padding: clamp(60px, 9vw, 130px) clamp(20px, 7vw, 120px) 70px;
+  max-width: 1200px;
+}
+.case-kicker,
+.case-index {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.case-hero h1 {
+  margin: 26px 0 0;
+  font: 900 clamp(64px, 12vw, 170px) / 0.82 var(--display);
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+}
+.case-hero h1 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.05em;
+  color: var(--action);
+}
+.case-lede {
+  max-width: 62ch;
+  margin: 32px 0 0;
+  font-size: clamp(18px, 1.7vw, 24px);
+  line-height: 1.55;
+}
+.case-lede b {
+  font-weight: 900;
+}
+
+/* Faktakassen: det en travl partner laeser foerst. */
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0;
+  margin: 54px 0 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.case-facts > div {
+  padding: 22px 24px 24px 0;
+  border-right: 1px solid var(--line);
+}
+.case-facts > div:last-child {
+  border-right: 0;
+}
+.case-facts dt {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.case-facts dd {
+  margin: 8px 0 0;
+  font-size: 17px;
+}
+.case-facts dd b {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+.case-disclosure {
+  margin: 26px 0 0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--action);
+}
+
+/* ------------------------------------------------------------------ blokke */
+.case-block {
+  padding: clamp(60px, 8vw, 110px) clamp(20px, 7vw, 120px);
+  max-width: 1200px;
+  border-top: 1px solid var(--line);
+}
+.case-block h2 {
+  margin: 22px 0 0;
+  font: 900 clamp(38px, 5.4vw, 76px) / 0.94 var(--display);
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+.case-block h2 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.04em;
+  color: var(--action);
+}
+.case-block-dark {
+  background: var(--ink);
+  color: var(--surface);
+  border-top: 0;
+}
+.case-block-dark .case-index {
+  color: #9a938a;
+}
+.case-block-dark .case-note {
+  color: #b3aca2;
+}
+
+.case-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(30px, 6vw, 90px);
+  margin-top: 46px;
+}
+.case-lead {
+  margin: 0;
+  font: italic clamp(21px, 2.3vw, 32px) / 1.4 var(--serif);
+}
+.case-cols p:not(.case-lead) {
+  font-size: 17px;
+  line-height: 1.72;
+}
+.case-cols > div > p:first-child {
+  margin-top: 0;
+}
+.case-note {
+  max-width: 65ch;
+  margin: 30px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ regler */
+.case-rules {
+  margin-top: 60px;
+  padding: 36px 40px 40px;
+  border: 2px solid rgba(245, 240, 230, 0.25);
+}
+.case-rules h3 {
+  margin: 0 0 8px;
+  font: 900 20px var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.case-rules ol {
+  margin: 0;
+  padding-left: 22px;
+}
+.case-rules li {
+  margin: 16px 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------- ruten */
+.case-route {
+  list-style: none;
+  margin: 46px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.case-route li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 86px 1fr auto;
+  gap: 18px;
+  align-items: baseline;
+  padding: 16px 0 16px 26px;
+  border-bottom: 1px solid var(--line);
+}
+/* Stregen ned gennem ruten, med et punkt ved hvert stop. */
+.case-route li:before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.case-route li:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+}
+.case-route li.is-start:before {
+  top: 22px;
+}
+.case-route li.is-end:before {
+  bottom: calc(100% - 22px);
+}
+.case-route li.is-start:after,
+.case-route li.is-end:after {
+  background: var(--action);
+  border-color: var(--action);
+}
+.case-route li.is-ferry:after {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.case-route b {
+  font-size: 15px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+.case-route span {
+  font: 900 21px var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+.case-route small {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------- tre kolonner */
+.case-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 50px;
+  border-top: 2px solid var(--ink);
+}
+.case-grid-3 article {
+  padding: 28px 30px 34px 0;
+  margin-right: 30px;
+  border-right: 1px solid var(--line);
+}
+.case-grid-3 article:last-child {
+  margin-right: 0;
+  border-right: 0;
+}
+.case-grid-3 span {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--action);
+}
+.case-grid-3 h3 {
+  margin: 10px 0 12px;
+  font: 900 23px/1.1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+}
+.case-grid-3 p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------- resultat */
+.case-block-result {
+  background: var(--green);
+}
+.case-numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin: 46px 0 10px;
+  border-top: 2px solid var(--ink);
+}
+.case-numbers article {
+  padding: 26px 24px 30px 0;
+  border-right: 1px solid rgba(17, 17, 15, 0.3);
+  border-bottom: 1px solid rgba(17, 17, 15, 0.3);
+}
+.case-numbers article:last-child {
+  border-right: 0;
+}
+.case-numbers span {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.case-numbers b {
+  display: block;
+  margin: 18px 0 8px;
+  font: 900 clamp(38px, 4.6vw, 64px) / 1 var(--display);
+  letter-spacing: -0.06em;
+}
+.case-numbers p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+/* Tal vi endnu ikke har: tydeligt markeret, aldrig opfundet. */
+.case-numbers .is-pending b {
+  font-size: clamp(24px, 2.6vw, 34px);
+  color: rgba(17, 17, 15, 0.42);
+}
+.case-numbers .is-prize b {
+  color: var(--action);
+}
+
+.case-quote {
+  max-width: 900px;
+  margin: 60px 0 0;
+  padding: 0;
+}
+.case-quote p {
+  margin: 0;
+  font: italic clamp(24px, 3.2vw, 44px) / 1.28 var(--serif);
+}
+.case-quote footer {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(17, 17, 15, 0.3);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ læring */
+.case-learnings {
+  list-style: none;
+  margin: 46px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  max-width: 900px;
+}
+.case-learnings li {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.case-learnings li:first-child {
+  border-top: 2px solid var(--ink);
+}
+
+/* --------------------------------------------------------------------- cta */
+.case-cta-block {
+  padding: clamp(60px, 8vw, 110px) clamp(20px, 7vw, 120px);
+  background: var(--yellow);
+}
+.case-cta-block h2 {
+  margin: 0;
+  font: 900 clamp(38px, 6vw, 84px) / 0.92 var(--display);
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+}
+.case-cta-block h2 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  color: var(--ink);
+}
+.case-cta-block p {
+  max-width: 58ch;
+  margin: 26px 0 30px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------ footer */
+.case-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 34px clamp(20px, 7vw, 120px);
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 12px;
+}
+.case-footer nav {
+  display: flex;
+  gap: 22px;
+  margin: 0;
+}
+.case-footer a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------- mobil */
+@media (max-width: 800px) {
+  .case-cols,
+  .case-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .case-grid-3 article {
+    margin: 0;
+    padding: 22px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .case-facts > div {
+    padding: 18px 16px 20px 0;
+  }
+  .case-rules {
+    padding: 24px 22px 28px;
+  }
+  .case-route li {
+    grid-template-columns: 68px 1fr;
+    gap: 10px;
+  }
+  .case-route small {
+    grid-column: 2;
+  }
+  .case-numbers article {
+    padding: 20px 16px 22px 0;
+  }
+  .case-header nav a {
+    padding: 0 6px;
+  }
+}
+
+/* ============================================================================
+   PRINT — "Gem som PDF"
+   Dokumentet skal kunne sendes til et brand: hvid baggrund, sort tekst,
+   ingen navigation, og ingen sidebrud midt i en overskrift.
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+  .case-header,
+  .case-cta-block,
+  .case-footer,
+  .skip-link {
+    display: none !important;
+  }
+  body.case-page {
+    background: #fff;
+    color: #000;
+  }
+  .case-block,
+  .case-hero {
+    padding: 0 0 18mm;
+    max-width: none;
+    border: 0;
+    break-inside: avoid;
+  }
+  /* De farvede blokke bliver til hvide med en ramme — sparer blaek og
+     laeser bedre paa papir. */
+  .case-block-dark,
+  .case-block-result,
+  .case-block-dark .case-rules {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #999;
+    padding: 8mm;
+  }
+  .case-block-dark .case-index,
+  .case-block-dark .case-note {
+    color: #444 !important;
+  }
+  .case-hero h1 {
+    font-size: 54pt;
+  }
+  .case-block h2 {
+    font-size: 24pt;
+    break-after: avoid;
+  }
+  .case-lede {
+    font-size: 12pt;
+  }
+  .case-cols,
+  .case-grid-3 {
+    grid-template-columns: 1fr 1fr;
+    gap: 8mm;
+  }
+  .case-cols p,
+  .case-grid-3 p,
+  .case-learnings li,
+  .case-rules li {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+  .case-numbers b {
+    font-size: 22pt;
+  }
+  .case-route li {
+    padding: 3mm 0 3mm 8mm;
+    break-inside: avoid;
+  }
+  .case-route span {
+    font-size: 13pt;
+  }
+  a[href]:after {
+    content: "";
+  }
+}
